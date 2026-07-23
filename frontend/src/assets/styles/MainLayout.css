@@ -3,7 +3,7 @@
 }
 
 .main-content{
-    margin-left:128px;
+    margin-left:260px;
     flex:1;
     min-height:100vh;
     background:linear-gradient(
@@ -16,4 +16,11 @@
 
 .main-content main{
     padding:32px;
+}
+@media (max-width:1024px){
+
+    .main-content{
+        margin-left:80px;
+    }
+
 }

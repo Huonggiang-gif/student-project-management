@@ -1,5 +1,5 @@
 .header{
-    height:70px;
+    height:90px;
     background:#fff;
     display:flex;
     justify-content:space-between;
@@ -18,26 +18,30 @@
 .header-left{
     display:flex;
     align-items:center;
-    gap:30px;
+    gap:24px;
     flex:1;
+    min-width:0;
 }
 
 .header-logo{
     color:#b80d45;
-    font-size:34px;
+    font-size:28px;
     font-weight:700;
+    white-space:nowrap;
+    flex-shrink:0;
 }
 
 .search-box{
-    width:100%;
-    max-width:320px;
+    flex:1;
+    min-width:100px;
+    max-width:250px;
     height:42px;
     background:#fff3f5;
     border-radius:25px;
     display:flex;
     align-items:center;
-    padding:0 16px;
     gap:10px;
+    padding:0 16px;
 }
 
 .search-box input{
@@ -56,6 +60,8 @@
     display:flex;
     align-items:center;
     gap:22px;
+    margin-left:auto;
+    flex-shrink:0;
 }
 
 .icon-btn{
@@ -91,4 +97,23 @@
 
 .user-name{
     font-weight:600;
+}
+@media (max-width:1024px){
+    .header{
+        padding:0 16px;
+    }
+    .header-left{
+        gap:16px;
+    }
+    .header-logo{
+        font-size:20px;
+    }
+    .search-box{
+        max-width:140px;
+        min-width:80px;
+    }
+    .user-name{
+        display:none;
+    }
+
 }
