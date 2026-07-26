@@ -1,6 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../../assets/styles/Sidebar.css"
 import { FaUsers, FaThLarge, FaFolderOpen,FaTasks,FaChartBar,FaCog,FaSignOutAlt,FaPlus,FaGraduationCap} from "react-icons/fa";
+
+
 function Sidebar() {
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("user"));
@@ -28,28 +30,53 @@ function Sidebar() {
             </div>
 
             <nav className="sidebar-menu">
-                <Link to="/dashboard" className="active">
+                <NavLink to="/dashboard" className={({ isActive }) =>
+                    isActive ? "active" : ""
+                }>
                     <FaThLarge />
                     <span>Tổng quan hệ thống</span>
-                </Link>
+                </NavLink>
+
                 {user?.role === "admin" && (
-                    <Link to="/users">
-                    <FaUsers />
-                    <span>Quản lý người dùng</span>
-                    </Link>
+                    <NavLink
+                        to="/users"
+                        className={({ isActive }) =>
+                            isActive ? "active" : ""
+                        }
+                    >
+                        <FaUsers />
+                        <span>Quản lý người dùng</span>
+                    </NavLink>
                 )}
-                <Link to="/project">
+                <NavLink
+                    to="/project"
+                    className={({ isActive }) =>
+                        isActive ? "active" : ""
+                    }
+                >
                     <FaFolderOpen />
                     <span>Đề tài</span>
-                </Link>
-                <Link to="/task">
+                </NavLink>
+
+                <NavLink
+                    to="/task"
+                    className={({ isActive }) =>
+                        isActive ? "active" : ""
+                    }
+                >
                     <FaTasks />
                     <span>Tiến độ</span>
-                </Link>
-                <Link to="/report">
+                </NavLink>
+
+                <NavLink
+                    to="/report"
+                    className={({ isActive }) =>
+                        isActive ? "active" : ""
+                    }
+                >
                     <FaChartBar />
                     <span>Báo cáo</span>
-                </Link>
+                </NavLink>
             </nav>
 
             <button className="new-project-btn">
@@ -58,10 +85,16 @@ function Sidebar() {
             </button>
 
             <div className="sidebar-footer">
-                <Link to="/settings">
+                <NavLink
+                    to="/settings"
+                    className={({ isActive }) =>
+                        isActive ? "active" : ""
+                    }
+                >
                     <FaCog />
                     <span>Cài đặt</span>
-                </Link>
+                </NavLink>
+                
                 <button
                     className="logout-btn"
                     onClick={handleLogout}

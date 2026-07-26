@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
+import UserPage from "../pages/UserPage";
 
 import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
@@ -27,6 +28,7 @@ function AppRoutes() {
                     <Route element={<MainLayout />}>
 
                         <Route path="/dashboard" element={<DashboardPage />}/>
+                        <Route path="/users" element={<UserPage />} />
                     </Route>
                 </Route>
             </Routes>
