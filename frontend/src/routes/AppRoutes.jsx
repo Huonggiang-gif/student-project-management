@@ -1,4 +1,4 @@
-import ProtectedRoute from "./ProtectetdRoute";
+import ProtectedRoute from "./ProtectetedRoute";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import LoginPage from "../pages/LoginPage";
