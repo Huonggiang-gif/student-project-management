@@ -1,7 +1,34 @@
-import { Link } from "react-router-dom";
-import "../../assets/styles/Sidebar.css"
-import { FaThLarge, FaFolderOpen,FaTasks,FaChartBar,FaCog,FaSignOutAlt,FaPlus,FaGraduationCap} from "react-icons/fa";
+import { NavLink, useNavigate } from "react-router-dom";
+import "../../assets/styles/Sidebar.css";
+
+import {
+    FaThLarge,
+    FaFolderOpen,
+    FaTasks,
+    FaChartBar,
+    FaCog,
+    FaSignOutAlt,
+    FaPlus,
+    FaGraduationCap
+} from "react-icons/fa";
+
 function Sidebar() {
+
+    const navigate = useNavigate();
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const role = user?.role;
+
+    function logout() {
+
+        localStorage.removeItem("token");
+
+        localStorage.removeItem("user");
+
+        navigate("/login");
+
+    }
 
     return (
 
@@ -14,86 +41,126 @@ function Sidebar() {
                 </div>
 
                 <div>
-
-                    <h2>
-                        HỆ THỐNG
-                    </h2>
-
-                    <p>
-                        Quản lý đồ án sinh viên
-                    </p>
-
+                    <h2>HỆ THỐNG</h2>
+                    <p>Quản lý đồ án sinh viên</p>
                 </div>
 
             </div>
 
             <nav className="sidebar-menu">
 
-                <Link to="/dashboard" className="active">
-
+                <NavLink
+                    to="/dashboard"
+                    className={({ isActive }) =>
+                        isActive ? "active" : ""
+                    }
+                >
                     <FaThLarge />
-
                     <span>Tổng quan hệ thống</span>
+                </NavLink>
 
-                </Link>
+                {role === "admin" && (
 
-                <Link to="/project">
+                    <NavLink
+                        to="/project"
+                        className={({ isActive }) =>
+                            isActive ? "active" : ""
+                        }
+                    >
+                        <FaFolderOpen />
+                        <span>Quản lý đề tài</span>
+                    </NavLink>
 
-                    <FaFolderOpen />
+                )}
 
-                    <span>Đề tài</span>
+                {role === "lecturer" && (
 
-                </Link>
+                    <NavLink
+                        to="/lecturer/project"
+                        className={({ isActive }) =>
+                            isActive ? "active" : ""
+                        }
+                    >
+                        <FaFolderOpen />
+                        <span>Đề tài hướng dẫn</span>
+                    </NavLink>
 
-                <Link to="/task">
+                )}
 
+                {role === "student" && (
+
+                    <NavLink
+                        to="/student/project"
+                        className={({ isActive }) =>
+                            isActive ? "active" : ""
+                        }
+                    >
+                        <FaFolderOpen />
+                        <span>Đề tài của tôi</span>
+                    </NavLink>
+
+                )}
+
+                <NavLink
+                    to="/task"
+                    className={({ isActive }) =>
+                        isActive ? "active" : ""
+                    }
+                >
                     <FaTasks />
-
                     <span>Tiến độ</span>
+                </NavLink>
 
-                </Link>
-
-                <Link to="/report">
-
+                <NavLink
+                    to="/report"
+                    className={({ isActive }) =>
+                        isActive ? "active" : ""
+                    }
+                >
                     <FaChartBar />
-
                     <span>Báo cáo</span>
-
-                </Link>
+                </NavLink>
 
             </nav>
 
-            <button className="new-project-btn">
+            {(role === "admin" || role === "student") && (
 
-                <FaPlus />
+                <button
+                    className="new-project-btn"
+                    onClick={() => navigate("/project/create")}
+                >
+                    <FaPlus />
+                    <span>Thêm đề tài</span>
+                </button>
 
-                <span>Thêm đề tài</span>
-
-            </button>
+            )}
 
             <div className="sidebar-footer">
 
-                <Link to="/settings">
-
+                <NavLink
+                    to="/settings"
+                    className={({ isActive }) =>
+                        isActive ? "active" : ""
+                    }
+                >
                     <FaCog />
-
                     <span>Cài đặt</span>
+                </NavLink>
 
-                </Link>
-
-                <Link to="/login">
-
+                <button
+                    className="logout-btn"
+                    onClick={logout}
+                >
                     <FaSignOutAlt />
-
                     <span>Đăng xuất</span>
-
-                </Link>
+                </button>
 
             </div>
 
         </aside>
 
-    )
+    );
+
 }
 
 export default Sidebar;
