@@ -32,7 +32,6 @@ function AppRoutes() {
                 </Route>
 
                 <Route element={<MainLayout />}>
-
                     <Route
                         path="/dashboard"
                         element={<DashboardPage />}
@@ -47,7 +46,6 @@ function AppRoutes() {
                         path="/report"
                         element={<ReportPage />}
                     />
-
                 </Route>
 
             </Routes>
