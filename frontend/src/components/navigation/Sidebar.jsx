@@ -46,7 +46,13 @@ function Sidebar() {
                     <FaTasks />
                     <span>Tiến độ</span>
                 </Link>
+<<<<<<< Updated upstream
                 <Link to="/report">
+=======
+
+                <Link to="/reports">
+
+>>>>>>> Stashed changes
                     <FaChartBar />
                     <span>Báo cáo</span>
                 </Link>
