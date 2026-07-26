@@ -9,10 +9,6 @@ function Header() {
 
             <div className="header-left">
 
-                <h2 className="header-logo">
-                    CapstonePro
-                </h2>
-
                 <div className="search-box">
 
                     <FaSearch className="search-icon" />

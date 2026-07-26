@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./ProtectetdRoute";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
@@ -15,18 +16,19 @@ function AppRoutes() {
         <BrowserRouter>
 
             <Routes>
+                <Route path="/" element={<Navigate to="/login" replace />}/>
 
                 <Route element={<AuthLayout />}>
 
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />}/>
                 </Route>
+                <Route element={<ProtectedRoute/>}>
+                    <Route element={<MainLayout />}>
 
-                <Route element={<MainLayout />}>
-
-                    <Route path="/dashboard" element={<DashboardPage />}/>
+                        <Route path="/dashboard" element={<DashboardPage />}/>
+                    </Route>
                 </Route>
-
             </Routes>
 
         </BrowserRouter>

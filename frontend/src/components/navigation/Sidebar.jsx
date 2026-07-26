@@ -16,11 +16,11 @@ function Sidebar() {
                 <div>
 
                     <h2>
-                        Project Management
+                        HỆ THỐNG
                     </h2>
 
                     <p>
-                        Academic Portal
+                        Quản lý đồ án sinh viên
                     </p>
 
                 </div>
@@ -33,7 +33,7 @@ function Sidebar() {
 
                     <FaThLarge />
 
-                    <span>Dashboard</span>
+                    <span>Tổng quan hệ thống</span>
 
                 </Link>
 
@@ -41,7 +41,7 @@ function Sidebar() {
 
                     <FaFolderOpen />
 
-                    <span>Projects</span>
+                    <span>Đề tài</span>
 
                 </Link>
 
@@ -49,7 +49,7 @@ function Sidebar() {
 
                     <FaTasks />
 
-                    <span>Tasks</span>
+                    <span>Tiến độ</span>
 
                 </Link>
 
@@ -57,7 +57,7 @@ function Sidebar() {
 
                     <FaChartBar />
 
-                    <span>Reports</span>
+                    <span>Báo cáo</span>
 
                 </Link>
 
@@ -67,7 +67,7 @@ function Sidebar() {
 
                 <FaPlus />
 
-                <span>New Project</span>
+                <span>Thêm đề tài</span>
 
             </button>
 
@@ -77,7 +77,7 @@ function Sidebar() {
 
                     <FaCog />
 
-                    <span>Settings</span>
+                    <span>Cài đặt</span>
 
                 </Link>
 
@@ -85,7 +85,7 @@ function Sidebar() {
 
                     <FaSignOutAlt />
 
-                    <span>Logout</span>
+                    <span>Đăng xuất</span>
 
                 </Link>
 

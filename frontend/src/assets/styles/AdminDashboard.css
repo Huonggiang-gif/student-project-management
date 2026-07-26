@@ -1,0 +1,159 @@
+.admin-dashboard{
+    padding:32px;
+    background:#f8f9fc;
+    min-height:100vh;
+}
+
+.dashboard-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.dashboard-header h1{
+    margin-top:8px;
+    font-size:36px;
+    color:#2c2c2c;
+}
+
+.dashboard-header p{
+    margin-top:8px;
+    color:#7b7b88;
+}
+
+/* 4 card */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:24px;
+}
+
+/* Chart + Activity */
+
+.dashboard-content{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:24px;
+    margin-bottom:28px;
+}
+/* ===================================================
+   Statistics Card
+=================================================== */
+
+.stat-card{
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,.06);
+    transition:0.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 24px rgba(0,0,0,.08);
+}
+
+.stat-icon{
+    width:64px;
+    height:64px;
+    border-radius:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+    flex-shrink:0;
+}
+
+.stat-info{
+    flex:1;
+}
+
+.stat-info span{
+    display:block;
+    font-size:15px;
+    color:#718096;
+    margin-bottom:8px;
+}
+
+.stat-info h2{
+    font-size:30px;
+    color:#2d3748;
+    font-weight:700;
+}
+.dashboard-chart,
+.recent-activity,
+.recent-projects{
+    background:#fff;
+    border-radius:16px;
+    padding:24px;
+    box-shadow:0 4px 12px rgba(0,0,0,.06);
+    margin-top: 20px;
+}
+
+.dashboard-chart h2{
+    margin-bottom:20px;
+    color:#2d3748;
+}
+
+.chart-placeholder{
+    height:320px;
+    border:2px dashed #f7bfd5;
+    border-radius:12px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#9ca3af;
+    background:#fff8fb;
+}
+
+
+.recent-activity h2{
+    margin-bottom:20px;
+    color:#2d3748;
+}
+
+.recent-activity ul{
+    list-style:none;
+}
+
+.recent-activity li{
+    padding:14px 0;
+    border-bottom:1px solid #ececec;
+    color:#4a5568;
+}
+
+.recent-activity li:last-child{
+    border-bottom:none;
+}
+
+
+.recent-projects h2{
+    margin-bottom:20px;
+    color:#2d3748;
+}
+
+.recent-projects table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.recent-projects th{
+    background:#fff4f8;
+    color:#444;
+    padding:16px;
+    text-align:left;
+    font-weight:600;
+}
+
+.recent-projects td{
+    padding:16px;
+    border-bottom:1px solid #f1f1f1;
+}
+
+.recent-projects tr:hover{
+    background:#fff9fb;
+}

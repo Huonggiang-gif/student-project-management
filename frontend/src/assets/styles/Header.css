@@ -23,14 +23,6 @@
     min-width:0;
 }
 
-.header-logo{
-    color:#b80d45;
-    font-size:28px;
-    font-weight:700;
-    white-space:nowrap;
-    flex-shrink:0;
-}
-
 .search-box{
     flex:1;
     min-width:100px;

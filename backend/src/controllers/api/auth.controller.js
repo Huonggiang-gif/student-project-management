@@ -33,6 +33,12 @@ async function login(req, res) {
             })
         }
 
+        if (user.status === "inactive") {
+            return res.status(403).json({
+                message: "Tài khoản đã bị khóa"
+            });
+        }
+        
         const token = jwt.sign(
             {
                 id: user.id,
