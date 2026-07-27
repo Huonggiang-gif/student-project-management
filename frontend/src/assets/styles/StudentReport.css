@@ -1,0 +1,180 @@
+.report-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.report-title {
+    margin-bottom: 25px;
+    color: #1e293b;
+}
+
+.report-form {
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-group input[type="number"],
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    outline: none;
+    transition: .3s;
+    font-size: 15px;
+}
+
+.form-group input[type="number"]:focus,
+.form-group input[type="text"]:focus {
+    border-color: #2563eb;
+}
+
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed #94a3b8;
+    border-radius: 8px;
+    background: #f8fafc;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn {
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .25s;
+}
+
+.btn:hover {
+    opacity: .9;
+}
+
+.btn-primary {
+    background: linear-gradient(
+        135deg,
+        #f48fb1,
+        #ec407a
+    );
+    color: white;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(
+        135deg,
+        #f8a5c2,
+        #f06292
+    );
+}
+
+.btn-success {
+    background: linear-gradient(
+        135deg,
+        #81c784,
+        #66bb6a
+    );
+    color: white;
+}
+
+.btn-success:hover {
+    background: linear-gradient(
+        135deg,
+        #a5d6a7,
+        #81c784
+    );
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: white;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.report-table th {
+    background: linear-gradient(
+        135deg,
+        #f48fb1,
+        #d77696
+    );
+    color: white;
+    padding: 14px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.report-table td {
+    border-bottom: 1px solid #e5e7eb;
+    padding: 14px;
+    text-align: center;
+}
+
+.report-table tr:hover {
+    background: #f8fafc;
+}
+
+.status-submitted {
+    background: #dbeafe;
+    color: #1d4ed8;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status-reviewed {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status-revision {
+    background: #fef3c7;
+    color: #b45309;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.action-btns {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.action-btns a {
+    text-decoration: none;
+}
+
+.empty-data {
+    margin-top: 25px;
+    text-align: center;
+    color: #64748b;
+    font-size: 16px;
+}
