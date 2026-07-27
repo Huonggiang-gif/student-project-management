@@ -20,4 +20,6 @@ router.put("/:id", authMiddleware,roleMiddleware.authorize("admin"), userControl
 router.get("/:id", authMiddleware,roleMiddleware.authorize("admin"), userController.getUserById);
 
 router.patch("/:id/status", authMiddleware,roleMiddleware.authorize("admin"), userController.updateUserStatus)
+
+router.post("/", authMiddleware, roleMiddleware.authorize("admin"), userController.createUser);
 module.exports = router;

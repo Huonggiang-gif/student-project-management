@@ -189,6 +189,130 @@ async function getLecturers(req, res) {
 
     }
 }
+//Thêm người dùng 
+async function createUser(req, res) {
+
+    try {
+
+        const { user_code,password,full_name, email, phone, role } = req.body;
+        
+        // 1. Kiểm tra dữ liệu bắt buộc
+        if (!user_code ||!password ||!full_name ||!email ||!phone||!role)
+        {
+
+            return res.status(400).json({
+                message: "Vui lòng điền đầy đủ thông tin"
+            });
+
+        }    
+
+        // 2. Kiểm tra định dạng email
+        const emailRegex =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if(!emailRegex.test(email)){
+            return res.status(400).json({
+                message:"Email không đúng định dạng"
+
+            });
+
+        }
+        // 3. Kiểm tra độ dài mật khẩu
+        if(password.length < 6){
+            return res.status(400).json({
+                message:
+                "Mật khẩu phải có ít nhất 6 kí tự"
+            });
+
+        }
+
+        // 4. Kiểm tra role hợp lệ
+
+        const roles = ["student", "lecturer","admin"]
+            
+        if(!roles.includes(role)){
+
+            return res.status(400).json({
+                message:"Vai trò không hợp lệ"
+            });
+
+        }
+
+        // 5. Kiểm tra mã người dùng khớp với role
+
+        const codeRules = {
+            student: /^SV\d+$/,
+            lecturer: /^GV\d+$/,
+            admin: /^AD\d+$/
+        };
+
+        if(!codeRules[role].test(user_code)){
+            return res.status(400).json({
+                message:
+                "Mã người dùng không khớp với vai trò  "
+            });
+        }
+
+        // 6. Kiểm tra mã người dùng đã tồn tại chưa
+        const existCode =
+            await userModel.findUserByUsercode(user_code);
+
+        if(existCode){
+            return res.status(400).json({
+                message:"Mã người dùng đã tồn tại"
+            });
+        }
+        // 7. Kiểm tra email đã tồn tại chưa
+        const existEmail =
+            await userModel.findUserByEmail(email);
+        if(existEmail){
+            return res.status(400).json({
+                message:"email đã tồn tại"
+            });
+        }
+        
+        // Kiểm tra số điện thoại
+        const phoneRegex = /^(03|05|07|08|09)\d{8}$/;
+
+        if (!phoneRegex.test(phone)||phone === "0000000000") {
+            return res.status(400).json({
+                message: "Số điện thoại không hợp lệ"
+            });
+        }
+
+        // 8. Hash password
+        const password_hash = await bcrypt.hash(password,10);
+
+        // 9. Lưu database
+        const userId = await userModel.createUser(
+                user_code,
+                password_hash,
+                full_name,
+                email,
+                phone,
+                role
+                
+            );
+        // 10. Trả kết quả
+        return res.status(201).json({
+            message:"Thêm thành công",
+            user:{
+                id:userId,
+                user_code,
+                full_name,
+                email,
+                phone,
+                role
+            }
+        });
+
+    } catch(error){
+        console.log(error);
+        return res.status(500).json({
+            message:"Server error"
+        });
+    }
+}
 // Khóa / Mở tài khoản
 async function updateUserStatus(req, res) {
 
@@ -236,5 +360,6 @@ module.exports = {
     searchUsers,
     getStudents,
     getLecturers,
-    updateUserStatus
+    updateUserStatus,
+    createUser
 }

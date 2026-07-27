@@ -11,12 +11,13 @@ export async function login(username, password) {
 }
 
 // Đăng ký
-export async function register(username, password, full_name, email, role) {
+export async function register(username, password, full_name, email,phone, role) {
     const response = await api.post("/auth/register", {
         username,
         password,
         full_name,
         email,
+        phone,
         role
     });
 

@@ -75,10 +75,10 @@ async function login(req, res) {
 }
 async function register(req, res) {
     try{
-        const {username, password, full_name, email, role} = req.body
+        const {username, password, full_name, email,phone, role } = req.body
 
         //kiểm tra rỗng
-        if(!username || !password || !full_name || !email || !role){
+        if(!username || !password || !full_name || !email ||!phone|| !role){
             return res.status(400).json({
                 message: "Vui lòng nhập đầy đủ thông tin"
             })
@@ -128,7 +128,7 @@ async function register(req, res) {
             })
         }
 
-        if (username.startsWith("ADMIN") && role !== "admin") {
+        if (username === "ADMIN" && role !== "admin") {
             return res.status(400).json({
                 message: "Mã ADMIN phải có role admin"
             })
@@ -149,10 +149,23 @@ async function register(req, res) {
                 message: "Email đã tồn tại"
             })
         }
+        
+
+        //Kiểm tra số điện thoại
+
+        const phoneRegex = /^(03|05|07|08|09)\d{8}$/;
+
+        if (!phoneRegex.test(phone)||phone === "0000000000") {
+            return res.status(400).json({
+                message: "Số điện thoại không hợp lệ"
+            });
+        }
+        
+        //Kiểm tra password_hash
         const password_hash = await bcrypt.hash(password, 10)
 
-        await userModel.createUser(username, password_hash, full_name, email, role)
-
+        await userModel.createUser(username, password_hash, full_name, email,phone, role)
+    
         res.status(201).json({
             message:"Đăng ký thành công"
         })

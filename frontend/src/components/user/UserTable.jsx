@@ -1,33 +1,11 @@
 import "../../assets/styles/User.css";
-import { FaEdit, FaLock, FaUnlock} from "react-icons/fa";
+import { FaEdit, FaLock, FaUnlock, FaTrash} from "react-icons/fa";
 
-function UserTable() {
-    const users = [
-        {
-            id: 1,
-            user_code: "SV001",
-            full_name: "Nguyễn Văn A",
-            email: "a@gmail.com",
-            role: "student",
-            status: "active"
-        },
-        {
-            id: 2,
-            user_code: "GV001",
-            full_name: "Trần Văn B",
-            email: "b@gmail.com",
-            role: "lecturer",
-            status: "active"
-        },
-        {
-            id: 3,
-            user_code: "AD001",
-            full_name: "Admin",
-            email: "admin@gmail.com",
-            role: "admin",
-            status: "active"
-        }
-    ];
+function UserTable({users, loading, onEdit, onChangeStatus}) {
+
+    if (loading) {
+        return <p>Đang tải dữ liệu...</p>
+    }
     return (
         <div className="user-table-container">
 
@@ -68,17 +46,32 @@ function UserTable() {
                                     <button
                                         className="action-btn edit-btn"
                                         title="Chỉnh sửa"
+                                        onClick={() => onEdit(user)}
                                     >
                                         <FaEdit />
                                     </button>
 
                                     <button
                                         className="action-btn lock-btn"
-                                        title="Khóa tài khoản"
+                                        title={
+                                            user.status === "active"
+                                            ? "Khóa tài khoản"
+                                            : "Mở khóa tài khoản"
+                                        }
+                                        onClick={() => onChangeStatus(user)}
                                     >
-                                        <FaLock />
+                                        {
+                                            user.status === "active"
+                                            ? <FaLock />
+                                            : <FaUnlock />
+                                        }
                                     </button>
-
+                                    <button
+                                        className="action-btn delete-btn"
+                                        title="Xóa người dùng"
+                                    >
+                                        <FaTrash />
+                                    </button>
                                 </div>
                             </td>
 
