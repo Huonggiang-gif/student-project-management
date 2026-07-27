@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-
+import { getUsers, searchUsers, updateUserStatus, getUserById } from "../services/userService";
 import "../assets/styles/User.css"
+
 import UserToolbar from "../components/user/UserToolbar";
 import UserTable from "../components/user/UserTable";
-
-import { getUsers, searchUsers, updateUserStatus } from "../services/userService";
 import UserModal from "../components/user/UserModal";
 import UserForm from "../components/user/UserForm";
+import UserDetail from "../components/user/UserDetail";
 
 function UserPage() {
     const [users, setUsers] = useState([])
@@ -89,6 +89,19 @@ function UserPage() {
         }
 
     }
+    const [showDetail, setShowDetail] = useState(false);
+
+    async function handleView(id) {
+        try {
+            const data = await getUserById(id);
+
+            setSelectedUser(data);
+            setShowDetail(true);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     function handleSuccess(){
 
@@ -134,6 +147,7 @@ function UserPage() {
                     loading={loading}
                     onEdit={handleEditUser}
                     onChangeStatus={handleChangeStatus}
+                    onView={handleView}
                 />
             </div>
 
@@ -150,6 +164,11 @@ function UserPage() {
                     onSuccess={handleSuccess}
                 />
             </UserModal>
+            <UserDetail
+                isOpen={showDetail}
+                user={selectedUser}
+                onClose={() => setShowDetail(false)}
+            />
 
         </div>
     )

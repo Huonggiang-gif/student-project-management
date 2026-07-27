@@ -116,7 +116,15 @@
     transition:0.25s;
     font-size:15px;
 }
+.view-btn {
+    background: #fce7f3;
+    color: #d81b60;
+}
 
+.view-btn:hover {
+    background: #f9a8d4;
+    color: white;
+}
 .edit-btn{
     background:#eef4ff;
     color:#2563eb;
@@ -298,4 +306,49 @@
     background:#d63384;
     transform:translateY(-2px);
     box-shadow:0 10px 25px rgba(232,62,140,.3);
+}
+.detail-modal{
+    width:450px;
+    background:#fff;
+    border-radius:16px;
+    padding:28px;
+}
+
+.detail-modal h2{
+    color:#d81b60;
+    margin-bottom:24px;
+    text-align:center;
+}
+
+.detail-item{
+    margin-bottom:16px;
+}
+
+.detail-item label{
+    display:block;
+    font-weight:600;
+    color:#6b7280;
+    margin-bottom:4px;
+}
+
+.detail-item p{
+    margin:0;
+    color:#1f2937;
+    font-size:15px;
+}
+
+.close-btn{
+    width:100%;
+    margin-top:20px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:linear-gradient(
+        135deg,
+        #ec407a,
+        #d81b60
+    );
+    color:white;
+    font-weight:600;
 }

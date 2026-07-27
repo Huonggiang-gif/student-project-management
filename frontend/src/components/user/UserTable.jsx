@@ -1,7 +1,7 @@
 import "../../assets/styles/User.css";
-import { FaEdit, FaLock, FaUnlock, FaTrash} from "react-icons/fa";
+import { FaEye, FaEdit, FaLock, FaUnlock, FaTrash} from "react-icons/fa";
 
-function UserTable({users, loading, onEdit, onChangeStatus}) {
+function UserTable({users, loading, onEdit, onChangeStatus, onView}) {
 
     if (loading) {
         return <p>Đang tải dữ liệu...</p>
@@ -43,6 +43,13 @@ function UserTable({users, loading, onEdit, onChangeStatus}) {
 
                             <td>
                                 <div className="action-buttons">
+                                    <button
+                                        className="action-btn view-btn"
+                                        title="Xem chi tiết"
+                                        onClick={() => onView(user.id)}
+                                    >
+                                        <FaEye />
+                                    </button>
                                     <button
                                         className="action-btn edit-btn"
                                         title="Chỉnh sửa"
