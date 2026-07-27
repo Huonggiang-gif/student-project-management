@@ -1,0 +1,195 @@
+.progress-page{
+    display:flex;
+    gap:25px;
+    padding:30px;
+}
+
+.progress-left{
+    flex:2;
+}
+
+.progress-right{
+    width:340px;
+}
+
+.progress-card,
+.progress-summary,
+.history-card{
+
+    background:#fff;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.progress-card h2{
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.progress-card p{
+    color:#666;
+    margin-bottom:25px;
+}
+
+.progress-card label{
+    display:block;
+    margin-top:20px;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.form-control{
+    width:100%;
+    border:1px solid #ddd;
+    border-radius:8px;
+    padding:12px;
+}
+
+textarea{
+    resize:none;
+}
+
+.button-group{
+
+    margin-top:25px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:15px;
+
+}
+
+.draft-btn{
+
+    background:#fff;
+
+    color:#e91e63;
+
+    border:1px solid #e91e63;
+
+    padding:10px 30px;
+
+    border-radius:8px;
+
+}
+
+.submit-btn{
+
+    background:#e91e63;
+
+    color:#fff;
+
+    border:none;
+
+    padding:10px 30px;
+
+    border-radius:8px;
+
+}
+
+.progress-summary{
+
+    margin-bottom:20px;
+
+}
+
+.progress-summary h4{
+
+    margin-bottom:20px;
+
+}
+
+.summary-box{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:20px;
+
+}
+
+.summary-box div{
+
+    width:48%;
+
+    text-align:center;
+
+    background:#f8f8f8;
+
+    padding:15px;
+
+    border-radius:10px;
+
+}
+
+.history-card{
+
+    max-height:600px;
+
+    overflow:auto;
+
+}
+
+.history-header{
+
+    margin-bottom:20px;
+
+}
+
+.history-item{
+
+    padding:15px 0;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.history-item h5{
+
+    margin-bottom:8px;
+
+}
+
+.history-item p{
+
+    margin-bottom:8px;
+
+    color:#666;
+
+}
+
+.progress{
+
+    height:12px;
+
+    border-radius:20px;
+
+    background:#f0f0f0;
+
+    overflow:hidden;
+
+}
+
+.progress-bar{
+
+    background:#e91e63;
+
+    height:100%;
+
+    color:white;
+
+    font-size:11px;
+
+    text-align:center;
+
+    line-height:12px;
+
+}

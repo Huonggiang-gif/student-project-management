@@ -1,0 +1,148 @@
+.project-create-page{
+    min-height:100vh;
+    background:#f4f6fb;
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    padding:40px;
+}
+
+.project-card{
+
+    width:850px;
+
+    background:#fff;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.project-card-header{
+
+    padding:25px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.project-card-header h2{
+
+    font-weight:700;
+
+}
+
+.project-card-body{
+
+    padding:25px;
+
+}
+
+.form-group{
+
+    margin-bottom:20px;
+
+}
+
+.form-group label{
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+    display:block;
+
+}
+
+.form-control{
+
+    border-radius:10px;
+
+}
+
+textarea.form-control{
+
+    resize:none;
+
+}
+
+.form-row{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+}
+
+.button-group{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:10px;
+
+    margin-top:25px;
+
+}
+
+.btn-back{
+
+    text-decoration:none;
+
+    background:#6c757d;
+
+    color:#fff;
+
+    padding:10px 20px;
+
+    border-radius:8px;
+
+}
+
+.btn-save{
+
+    background:#dc3545;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:10px 20px;
+
+}
+
+.btn-save:hover{
+
+    background:#bb2d3b;
+
+}
+
+.btn-back:hover{
+
+    color:#fff;
+
+    background:#5a6268;
+
+}
+
+@media(max-width:768px){
+
+    .project-card{
+
+        width:100%;
+
+    }
+
+    .form-row{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
