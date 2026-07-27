@@ -19,17 +19,20 @@ app.use(
 // Routes
 const authRoutes = require("./routes/api/auth.route");
 const userRoute = require("./routes/api/user.route");
+const topicRoutes = require("./routes/api/topic.route");
 const reportRoute = require("./routes/api/report.route");
 const progressRoute = require("./routes/api/progress.route");
 const evaluationRoute = require("./routes/api/evaluation.route");
 
-// API
+//api
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoute);
+app.use("/api/topics", topicRoutes);
 app.use("/api/reports", reportRoute);
 app.use("/api/progress", progressRoute);
 app.use("/api/evaluations", evaluationRoute);
 
 module.exports = app;
+
 
 console.log(path.join(__dirname, "../uploads"));

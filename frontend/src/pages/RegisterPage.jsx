@@ -9,6 +9,7 @@ function RegisterPage() {
     const [password, setPassword] = useState("");
     const [full_name, setFullName] = useState("");
     const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("")
     const [role, setRole] = useState("student");
 
     const [error, setError] = useState("");
@@ -30,6 +31,7 @@ function RegisterPage() {
                 password,
                 full_name,
                 email,
+                phone,
                 role
             );
 
@@ -99,7 +101,17 @@ function RegisterPage() {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
+                    <br />
 
+                    <div className="form-group">
+                        <label>Số điện thoại</label>
+
+                        <input
+                            type="text"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                    </div>
                     <br />
 
                     <div className="form-group">
@@ -124,7 +136,7 @@ function RegisterPage() {
                         <p style={{ color: "green" }}>{success}</p>
                     )}
 
-                    <button type="submit" className="btn-primary">
+                    <button type="submit" className="auth-btn">
                         Đăng ký
                     </button>
 
