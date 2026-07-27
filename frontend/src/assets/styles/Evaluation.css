@@ -1,0 +1,53 @@
+.evaluation-container{
+
+    max-width:700px;
+
+    margin:30px auto;
+
+    background:#fff;
+
+    padding:30px;
+
+    border-radius:10px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.evaluation-container h2{
+
+    margin-bottom:20px;
+
+}
+
+.evaluation-container input,
+
+.evaluation-container textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-bottom:15px;
+
+    border:1px solid #ddd;
+
+    border-radius:6px;
+
+    font-size:15px;
+
+}
+
+.evaluation-container textarea{
+
+    min-height:120px;
+
+    resize:vertical;
+
+}
+
+.evaluation-container button{
+
+    width:100%;
+
+}

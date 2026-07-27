@@ -5,6 +5,8 @@ import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import ReportPage from "../pages/ReportPage";
 import UserPage from "../pages/UserPage";
+import EvaluationPage from "../pages/EvaluationPage";
+import ProgressPage from "../pages/ProgressPage";
 
 import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
@@ -45,6 +47,14 @@ function AppRoutes() {
                     <Route
                         path="/report"
                         element={<ReportPage />}
+                    />
+                    <Route
+                        path="/evaluation"
+                        element={<EvaluationPage />}
+                    />
+                    <Route
+                        path="/task"
+                        element={<ProgressPage />}
                     />
                 </Route>
 
