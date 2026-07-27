@@ -1,10 +1,12 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import ProtectedRoute from "./ProtectetdRoute";
+import ProtectedRoute from "./ProtectetedRoute";
 
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
+import ReportPage from "../pages/ReportPage";
+import UserPage from "../pages/UserPage";
 
 import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
@@ -22,7 +24,6 @@ import Progress from "../pages/progress/Progress";
 function AppRoutes() {
     return (
         <BrowserRouter>
-
             <Routes>
 
                 <Route
@@ -98,7 +99,6 @@ function AppRoutes() {
                 </Route>
 
             </Routes>
-
         </BrowserRouter>
     );
 }

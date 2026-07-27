@@ -1,105 +1,62 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import "../../assets/styles/Sidebar.css";
+import "../../assets/styles/Sidebar.css"
+import { FaUsers, FaThLarge, FaFolderOpen,FaTasks,FaChartBar,FaCog,FaSignOutAlt,FaPlus,FaGraduationCap} from "react-icons/fa";
 
-import {
-    FaThLarge,
-    FaFolderOpen,
-    FaTasks,
-    FaChartBar,
-    FaCog,
-    FaSignOutAlt,
-    FaPlus,
-    FaGraduationCap
-} from "react-icons/fa";
 
 function Sidebar() {
-
     const navigate = useNavigate();
-
     const user = JSON.parse(localStorage.getItem("user"));
 
-    const role = user?.role;
-
-    function logout() {
-
+    function handleLogout() {
         localStorage.removeItem("token");
-
         localStorage.removeItem("user");
 
-        navigate("/login");
-
+        navigate("/login", { replace: true });
     }
-
     return (
-
         <aside className="sidebar">
-
             <div className="sidebar-logo">
-
                 <div className="logo-icon">
                     <FaGraduationCap />
                 </div>
-
                 <div>
-                    <h2>HỆ THỐNG</h2>
-                    <p>Quản lý đồ án sinh viên</p>
+                    <h2>
+                        HỆ THỐNG
+                    </h2>
+                    <p>
+                        Quản lý đồ án sinh viên
+                    </p>
                 </div>
-
             </div>
 
             <nav className="sidebar-menu">
-
-                <NavLink
-                    to="/dashboard"
-                    className={({ isActive }) =>
-                        isActive ? "active" : ""
-                    }
-                >
+                <NavLink to="/dashboard" className={({ isActive }) =>
+                    isActive ? "active" : ""
+                }>
                     <FaThLarge />
                     <span>Tổng quan hệ thống</span>
                 </NavLink>
 
-                {role === "admin" && (
-
+                {user?.role === "admin" && (
                     <NavLink
-                        to="/project"
+                        to="/users"
                         className={({ isActive }) =>
                             isActive ? "active" : ""
                         }
                     >
-                        <FaFolderOpen />
-                        <span>Quản lý đề tài</span>
+                        <FaUsers />
+                        <span>Quản lý người dùng</span>
                     </NavLink>
-
                 )}
-
-                {role === "lecturer" && (
-
-                    <NavLink
-                        to="/lecturer/project"
-                        className={({ isActive }) =>
-                            isActive ? "active" : ""
-                        }
-                    >
-                        <FaFolderOpen />
-                        <span>Đề tài hướng dẫn</span>
-                    </NavLink>
-
-                )}
-
-                {role === "student" && (
-
-                    <NavLink
-                        to="/student/project"
-                        className={({ isActive }) =>
-                            isActive ? "active" : ""
-                        }
-                    >
-                        <FaFolderOpen />
-                        <span>Đề tài của tôi</span>
-                    </NavLink>
-
-                )}
+                <NavLink
+                    to="/project"
+                    className={({ isActive }) =>
+                        isActive ? "active" : ""
+                    }
+                >
+                    <FaFolderOpen />
+                    <span>Đề tài</span>
+                </NavLink>
 
                 <NavLink
                     to="/task"
@@ -120,23 +77,14 @@ function Sidebar() {
                     <FaChartBar />
                     <span>Báo cáo</span>
                 </NavLink>
-
             </nav>
 
-            {(role === "admin" || role === "student") && (
-
-                <button
-                    className="new-project-btn"
-                    onClick={() => navigate("/project/create")}
-                >
-                    <FaPlus />
-                    <span>Thêm đề tài</span>
-                </button>
-
-            )}
+            <button className="new-project-btn">
+                <FaPlus />
+                <span>Thêm đề tài</span>
+            </button>
 
             <div className="sidebar-footer">
-
                 <NavLink
                     to="/settings"
                     className={({ isActive }) =>
@@ -146,21 +94,17 @@ function Sidebar() {
                     <FaCog />
                     <span>Cài đặt</span>
                 </NavLink>
-
+                
                 <button
                     className="logout-btn"
-                    onClick={logout}
+                    onClick={handleLogout}
                 >
                     <FaSignOutAlt />
                     <span>Đăng xuất</span>
                 </button>
-
             </div>
-
         </aside>
-
-    );
-
+    )
 }
 
 export default Sidebar;

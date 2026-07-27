@@ -87,20 +87,18 @@ function ActionButtons({
 
             {/* ================= STUDENT ================= */}
 
-            {role === "student" && (
-                <>
-                    {topic.status === "pending" && (
+            {role === "student" &&
+                (topic.status === "pending" ||
+                    topic.status === "rejected") && (
 
-                        <Link
-                            to={`/project/edit/${topic.id}`}
-                            className="btn btn-outline-warning btn-sm"
-                        >
-                            <i className="bi bi-pencil"></i>
-                        </Link>
+                    <Link
+                        to={`/project/edit/${topic.id}`}
+                        className="btn btn-outline-warning btn-sm"
+                    >
+                        <i className="bi bi-pencil"></i>
+                    </Link>
 
-                    )}
-                </>
-            )}
+                )}
 
         </div>
 

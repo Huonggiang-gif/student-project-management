@@ -1,128 +1,135 @@
-const Progress=require("../../models/progress.model");
+const progressModel = require("../../models/progress.model")
 
-exports.getAll=async(req,res)=>{
-
-    try{
-
-        const data=await Progress.getAll();
-
-        res.json(data);
-
+// Lấy danh sách tiến độ theo đề tài
+async function getProgress(req, res) {
+    const { topicId } = req.params
+    try {
+        const progress = await progressModel.findProgressByTopic(topicId)
+        res.json(progress)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success: false,
+            message: "Lỗi khi lấy danh sách tiến độ"
+        })
     }
-    catch(err){
-
-        res.status(500).json(err);
-
-    }
-
 }
 
-exports.getById=async(req,res)=>{
-
-    try{
-
-        const data=await Progress.getById(req.params.id);
-
-        res.json(data);
-
+// Lấy một tiến độ theo ID
+async function getProgressById(req, res) {
+    const { id } = req.params
+    try {
+        const progress = await progressModel.findProgressById(id)
+        if (!progress) {
+            return res.status(404).json({
+                message: "Không tìm thấy tiến độ"
+            })
+        }
+        res.json(progress)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success: false,
+            message: "Lỗi khi lấy tiến độ"
+        })
     }
-    catch(err){
-
-        res.status(500).json(err);
-
-    }
-
 }
 
-exports.create=async(req,res)=>{
-
-    try{
-
+// Thêm tiến độ mới
+async function createProgress(req, res) {
+    try {
         const {
-
             topic_id,
-            description,
-            lecturer_comment
-
-        }=req.body;
-
-        const result=await Progress.create([
-
+            description
+        } = req.body
+        // Kiểm tra dữ liệu
+        if (
+            !topic_id ||
+            !description
+        ) {
+            return res.status(400).json({
+                message: "Vui lòng nhập đầy đủ thông tin tiến độ"
+            })
+        }
+        const result = await progressModel.createProgress(
             topic_id,
-
-            description,
-
-            lecturer_comment
-
-        ]);
-
-        res.json({
-
-            message:"Create success",
-
-            id:result.insertId
-
-        });
-
+            description
+        )
+        res.status(201).json({
+            message: "Cập nhật tiến độ thành công",
+            progress_id: result.insertId
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success: false,
+            message: "Lỗi khi cập nhật tiến độ"
+        })
     }
-    catch(err){
-
-        res.status(500).json(err);
-
-    }
-
 }
 
-exports.update=async(req,res)=>{
-
-    try{
-
-        await Progress.update(
-
-            req.params.id,
-
-            [
-
-                req.body.description,
-
-                req.body.lecturer_comment
-
-            ]
-
-        );
-
+// Giảng viên nhận xét tiến độ
+async function updateComment(req, res) {
+    const { id } = req.params
+    const { lecturer_comment } = req.body
+    try {
+        // Kiểm tra dữ liệu
+        if (!lecturer_comment) {
+            return res.status(400).json({
+                message: "Vui lòng nhập nhận xét"
+            })
+        }
+        // Kiểm tra tiến độ tồn tại
+        const progress = await progressModel.findProgressById(id)
+        if (!progress) {
+            return res.status(404).json({
+                message: "Không tìm thấy tiến độ"
+            })
+        }
+        await progressModel.updateLecturerComment(
+            id,
+            lecturer_comment
+        )
         res.json({
-
-            message:"Update success"
-
-        });
-
+            message: "Nhận xét tiến độ thành công"
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success: false,
+            message: "Lỗi khi nhận xét tiến độ"
+        })
     }
-    catch(err){
-
-        res.status(500).json(err);
-
-    }
-
 }
 
-exports.delete=async(req,res)=>{
-
-    try{
-
-        await Progress.delete(req.params.id);
-
+// Xóa tiến độ
+async function deleteProgress(req, res) {
+    const { id } = req.params
+    try {
+        // Kiểm tra tiến độ tồn tại
+        const progress = await progressModel.findProgressById(id)
+        if (!progress) {
+            return res.status(404).json({
+                message: "Không tìm thấy tiến độ"
+            })
+        }
+        await progressModel.deleteProgress(id)
         res.json({
-
-            message:"Delete success"
-
-        });
-
+            message: "Xóa tiến độ thành công"
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success: false,
+            message: "Lỗi khi xóa tiến độ"
+        })
     }
-    catch(err){
+}
 
-        res.status(500).json(err);
-
-    }
-
+module.exports = {
+    getProgress,
+    getProgressById,
+    createProgress,
+    updateComment,
+    deleteProgress
 }

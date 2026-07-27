@@ -6,8 +6,9 @@ import "../../styles/projectCreate.css";
 function TopicEdit() {
 
     const { id } = useParams();
-
     const navigate = useNavigate();
+
+    const user = JSON.parse(localStorage.getItem("user"));
 
     const [form, setForm] = useState({
         title: "",
@@ -21,20 +22,32 @@ function TopicEdit() {
     }, []);
 
     const loadTopic = async () => {
-
         try {
 
             const res = await topicService.getById(id);
 
-            setForm(res.data);
+            setForm({
+                title: res.data.title,
+                description: res.data.description,
+                lecturer_id: res.data.lecturer_id,
+                status: res.data.status
+            });
 
-        } catch (error) {
+        } catch (err) {
 
-            console.log(error);
+            console.log(err);
+            alert("Không thể tải đề tài.");
 
         }
-
     };
+
+    const lockContent =
+        (user.role === "lecturer" || user.role === "admin") &&
+        (
+            form.status === "approved" ||
+            form.status === "in_progress" ||
+            form.status === "completed"
+        );
 
     const handleChange = (e) => {
 
@@ -57,11 +70,15 @@ function TopicEdit() {
 
             navigate("/project");
 
-        } catch (error) {
+        } catch (err) {
 
-            console.log(error);
+            console.log(err);
 
-            alert("Cập nhật thất bại!");
+            if (err.response) {
+                alert(err.response.data.message);
+            } else {
+                alert("Có lỗi xảy ra.");
+            }
 
         }
 
@@ -77,13 +94,27 @@ function TopicEdit() {
 
                     <h2>✏️ Chỉnh sửa đề tài</h2>
 
-                    <p>
-                        Cập nhật thông tin đề tài.
-                    </p>
+                    <p>Cập nhật thông tin đề tài</p>
 
                 </div>
 
                 <div className="project-card-body">
+
+                    {lockContent && (
+
+                        <div
+                            style={{
+                                background: "#fff3cd",
+                                color: "#856404",
+                                padding: "10px",
+                                borderRadius: "5px",
+                                marginBottom: "20px"
+                            }}
+                        >
+                            Đề tài đã được duyệt hoặc đang thực hiện nên không thể chỉnh sửa.
+                        </div>
+
+                    )}
 
                     <form onSubmit={submit}>
 
@@ -97,6 +128,7 @@ function TopicEdit() {
                                 className="form-control"
                                 value={form.title}
                                 onChange={handleChange}
+                                disabled={lockContent}
                                 required
                             />
 
@@ -112,6 +144,7 @@ function TopicEdit() {
                                 className="form-control"
                                 value={form.description}
                                 onChange={handleChange}
+                                disabled={lockContent}
                             />
 
                         </div>
@@ -128,44 +161,50 @@ function TopicEdit() {
                                     className="form-control"
                                     value={form.lecturer_id}
                                     onChange={handleChange}
+                                    disabled={lockContent}
                                 />
 
                             </div>
 
-                            <div className="form-group">
+                            {user.role !== "student" && (
 
-                                <label>Trạng thái</label>
+                                <div className="form-group">
 
-                                <select
-                                    name="status"
-                                    className="form-control"
-                                    value={form.status}
-                                    onChange={handleChange}
-                                >
+                                    <label>Trạng thái</label>
 
-                                    <option value="pending">
-                                        Chờ duyệt
-                                    </option>
+                                    <select
+                                        name="status"
+                                        className="form-control"
+                                        value={form.status}
+                                        onChange={handleChange}
+                                        disabled={lockContent}
+                                    >
 
-                                    <option value="approved">
-                                        Đã duyệt
-                                    </option>
+                                        <option value="pending">
+                                            Chờ duyệt
+                                        </option>
 
-                                    <option value="in_progress">
-                                        Đang thực hiện
-                                    </option>
+                                        <option value="approved">
+                                            Đã duyệt
+                                        </option>
 
-                                    <option value="completed">
-                                        Hoàn thành
-                                    </option>
+                                        <option value="in_progress">
+                                            Đang thực hiện
+                                        </option>
 
-                                    <option value="rejected">
-                                        Từ chối
-                                    </option>
+                                        <option value="completed">
+                                            Hoàn thành
+                                        </option>
 
-                                </select>
+                                        <option value="rejected">
+                                            Từ chối
+                                        </option>
 
-                            </div>
+                                    </select>
+
+                                </div>
+
+                            )}
 
                         </div>
 
@@ -178,12 +217,16 @@ function TopicEdit() {
                                 ← Quay lại
                             </Link>
 
-                            <button
-                                type="submit"
-                                className="btn-save"
-                            >
-                                💾 Cập nhật
-                            </button>
+                            {!lockContent && (
+
+                                <button
+                                    type="submit"
+                                    className="btn-save"
+                                >
+                                    💾 Cập nhật
+                                </button>
+
+                            )}
 
                         </div>
 
