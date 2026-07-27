@@ -75,6 +75,10 @@ function AppRoutes() {
                             path="/project"
                             element={<AdminProject />}
                         />
+                        <Route
+                            path="/users"
+                            element={<UserPage />}
+                        />
                     </Route>
                 </Route>
 

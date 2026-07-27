@@ -18,15 +18,15 @@ async function findUserByEmail(email) {
 
     return users[0] || null
 }
-
-async function createUser(user_code, password_hash, full_name, email,role) {
+//Thêm
+async function createUser(user_code, password_hash, full_name, email, phone, role) {
     const [result] = await db.query(
         `INSERT INTO users
-        (user_code, password_hash, full_name, email, role)
-        VALUES(?, ?, ?, ?, ?)`,
-        [user_code, password_hash, full_name, email, role]
+        (user_code, password_hash, full_name, email, phone, role)
+        VALUES(?, ?, ?, ?, ?, ?)`,
+        [user_code, password_hash, full_name, email, phone, role]
     )
-    return result
+    return result.insertId
 }
 //Lấy danh sách người dùng
 async function getAllUsers() {
@@ -132,6 +132,7 @@ async function getLecturers() {
 
     return users;
 }
+
 // Khóa / Mở tài khoản
 async function updateUserStatus(id, status) {
 
