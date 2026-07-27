@@ -14,41 +14,77 @@ function getConfig() {
 
 const topicService = {
 
-    getAll() {
-        return axios.get(API_URL, getConfig());
+    async getAll() {
+        const response = await axios.get(API_URL, getConfig());
+        return response.data;
     },
 
-    getById(id) {
-        return axios.get(`${API_URL}/${id}`, getConfig());
+    async getById(id) {
+        const response = await axios.get(`${API_URL}/${id}`, getConfig());
+        return response.data;
     },
 
-    create(data) {
-        return axios.post(API_URL, data, getConfig());
+    async create(data) {
+        const response = await axios.post(
+            API_URL,
+            data,
+            getConfig()
+        );
+        return response.data;
     },
 
-    update(id, data) {
-        return axios.put(`${API_URL}/${id}`, data, getConfig());
+    async update(id, data) {
+        const response = await axios.put(
+            `${API_URL}/${id}`,
+            data,
+            getConfig()
+        );
+        return response.data;
     },
 
-    remove(id) {
-        return axios.delete(`${API_URL}/${id}`, getConfig());
+    async remove(id) {
+        const response = await axios.delete(
+            `${API_URL}/${id}`,
+            getConfig()
+        );
+        return response.data;
     },
 
-    approve(id) {
-        return axios.patch(
+    async approve(id) {
+        const response = await axios.patch(
             `${API_URL}/${id}/approve`,
             {},
             getConfig()
         );
+        return response.data;
     },
 
-    reject(id) {
-        return axios.patch(
+    async reject(id) {
+        const response = await axios.patch(
             `${API_URL}/${id}/reject`,
             {},
             getConfig()
         );
+        return response.data;
+    },
+
+    async getAvailableTopics() {
+        const response = await axios.get(
+            `${API_URL}/available`,
+            getConfig()
+        );
+        return response.data;
+    },
+
+    async registerTopic(data) {
+        const response = await axios.post(
+            `${API_URL}/register`,
+            data,
+            getConfig()
+        );
+        return response.data;
     }
+
 };
 
 export default topicService;

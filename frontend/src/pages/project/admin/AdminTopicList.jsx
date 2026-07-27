@@ -8,25 +8,29 @@ import ProjectTable from "../../../components/project/ProjectTable";
 
 import "../../../styles/topic.css";
 
-function AdminProject() {
+function AdminTopicList() {
 
     const navigate = useNavigate();
 
     const [topics, setTopics] = useState([]);
+
     const [keyword, setKeyword] = useState("");
+
     const [status, setStatus] = useState("");
 
     useEffect(() => {
+
         loadTopics();
+
     }, []);
 
-    const loadTopics = async () => {
+    async function loadTopics() {
 
         try {
 
-            const data = await topicService.getAll();
+            const res = await topicService.getAll();
 
-            setTopics(data);
+            setTopics(res.data || []);
 
         } catch (err) {
 
@@ -36,21 +40,23 @@ function AdminProject() {
 
         }
 
-    };
+    }
 
-    const handleDelete = async (id) => {
+    async function handleDelete(id) {
 
-        if (!window.confirm("Bạn có chắc muốn xóa đề tài này?")) {
-            return;
-        }
+        const confirmDelete = window.confirm(
+            "Bạn có chắc muốn xóa đề tài này?"
+        );
+
+        if (!confirmDelete) return;
 
         try {
 
             await topicService.remove(id);
 
-            loadTopics();
-
             alert("Xóa thành công");
+
+            loadTopics();
 
         } catch (err) {
 
@@ -60,17 +66,17 @@ function AdminProject() {
 
         }
 
-    };
+    }
 
-    const handleApprove = async (id) => {
+    async function handleApprove(id) {
 
         try {
 
             await topicService.approve(id);
 
-            loadTopics();
-
             alert("Đã duyệt đề tài");
+
+            loadTopics();
 
         } catch (err) {
 
@@ -80,27 +86,27 @@ function AdminProject() {
 
         }
 
-    };
+    }
 
-    const handleReject = async (id) => {
+    async function handleReject(id) {
 
         try {
 
             await topicService.reject(id);
 
-            loadTopics();
-
             alert("Đã từ chối đề tài");
+
+            loadTopics();
 
         } catch (err) {
 
             console.log(err);
 
-            alert("Thao tác thất bại");
+            alert("Từ chối thất bại");
 
         }
 
-    };
+    }
 
     const filteredTopics = topics.filter((topic) => {
 
@@ -128,34 +134,41 @@ function AdminProject() {
                     <div>
 
                         <h2 className="fw-bold">
-                            Quản lý đề tài
+
+                            Danh sách đề tài
+
                         </h2>
 
                         <small className="text-muted">
 
-                            Tổng số đề tài:
-                            {" "}
-                            {filteredTopics.length}
+                            Tổng số: {filteredTopics.length}
 
                         </small>
 
                     </div>
+
+                    <button
+                        className="btn btn-primary"
+                        onClick={() => navigate("/project/create")}
+                    >
+
+                        + Thêm đề tài
+
+                    </button>
 
                 </div>
 
                 <ProjectToolbar
 
                     keyword={keyword}
+
                     setKeyword={setKeyword}
 
                     status={status}
+
                     setStatus={setStatus}
 
                     role="admin"
-
-                    onCreate={() =>
-                        navigate("/project/create")
-                    }
 
                 />
 
@@ -181,4 +194,4 @@ function AdminProject() {
 
 }
 
-export default AdminProject;
+export default AdminTopicList;

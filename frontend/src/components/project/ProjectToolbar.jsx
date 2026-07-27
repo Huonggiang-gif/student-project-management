@@ -1,12 +1,17 @@
 import React from "react";
 
 function ProjectToolbar({
+
     keyword,
     setKeyword,
+
     status,
     setStatus,
+
     role,
+
     onCreate
+
 }) {
 
     return (
@@ -17,7 +22,7 @@ function ProjectToolbar({
 
                 <input
                     className="form-control"
-                    placeholder="🔍 Tìm kiếm đề tài..."
+                    placeholder="Tìm kiếm đề tài..."
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                 />
@@ -33,11 +38,15 @@ function ProjectToolbar({
                 >
 
                     <option value="">
-                        Tất cả trạng thái
+                        Tất cả
                     </option>
 
                     <option value="pending">
                         Chờ duyệt
+                    </option>
+
+                    <option value="waiting_approval">
+                        Chờ duyệt SV
                     </option>
 
                     <option value="approved">
@@ -62,16 +71,27 @@ function ProjectToolbar({
 
             <div className="col-md-2 text-end">
 
-                {(role === "admin" || role === "student") && (
+                {role === "admin" && (
 
                     <button
                         className="btn btn-danger w-100"
                         onClick={onCreate}
                     >
 
-                        <i className="bi bi-plus-lg"></i>
+                        + Thêm đề tài
 
-                        {" "}Thêm đề tài
+                    </button>
+
+                )}
+
+                {role === "student" && (
+
+                    <button
+                        className="btn btn-success w-100"
+                        onClick={onCreate}
+                    >
+
+                        Đăng ký
 
                     </button>
 

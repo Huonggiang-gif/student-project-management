@@ -72,7 +72,7 @@ function LoginPage() {
                         </p>
                     )}
 
-                    <button type="submit" className="btn-primary">
+                    <button type="submit" className="auth-btn">
                         Đăng nhập
                     </button>
                     

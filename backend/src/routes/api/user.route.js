@@ -11,7 +11,7 @@ router.get("/search", authMiddleware,roleMiddleware.authorize("admin"), userCont
 
 router.get("/students", authMiddleware, roleMiddleware.authorize("admin") ,userController.getStudents)
 
-router.get("/lecturers", authMiddleware,roleMiddleware.authorize("admin"), userController.getLecturers)
+router.get("/lecturers", authMiddleware,roleMiddleware.authorize("admin", "student"), userController.getLecturers)
 
 router.put("/change-password", authMiddleware, userController.changePassword);
 

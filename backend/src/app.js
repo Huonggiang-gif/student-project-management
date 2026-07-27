@@ -29,7 +29,3 @@ app.use(
 )
 
 module.exports = app;
-
-console.log(
-    path.join(__dirname, "../uploads")
-)

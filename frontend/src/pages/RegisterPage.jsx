@@ -136,7 +136,7 @@ function RegisterPage() {
                         <p style={{ color: "green" }}>{success}</p>
                     )}
 
-                    <button type="submit" className="btn-primary">
+                    <button type="submit" className="auth-btn">
                         Đăng ký
                     </button>
 
