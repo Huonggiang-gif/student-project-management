@@ -9,4 +9,16 @@ router.get(
     dashboardController.getDashboardStats
 );
 
+router.get(
+    "/lecturer",
+    authMiddleware,
+    dashboardController.getLecturerDashboard
+);
+
+router.get(
+    "/student",
+    authMiddleware,
+    dashboardController.getStudentDashboard
+);
+
 module.exports = router;

@@ -25,3 +25,62 @@ exports.getStats = async () => {
         totalTopics: topics.total
     };
 };
+
+exports.getLecturerStats = async (lecturerId) => {
+
+    const [[topics]] = await db.query(
+        "SELECT COUNT(*) AS total FROM topics WHERE lecturer_id = ?",
+        [lecturerId]
+    );
+
+    const [[students]] = await db.query(
+        `SELECT COUNT(DISTINCT student_id) AS total
+         FROM topics
+         WHERE lecturer_id = ?`,
+        [lecturerId]
+    );
+
+    const [[progress]] = await db.query(
+        `SELECT COUNT(*) AS total
+         FROM progress_reports p
+         JOIN topics t ON p.topic_id = t.id
+         WHERE t.lecturer_id = ?`,
+        [lecturerId]
+    );
+
+    return {
+        totalTopics: topics.total,
+        totalStudents: students.total,
+        totalProgress: progress.total
+    };
+};
+
+exports.getStudentStats = async (studentId) => {
+
+    const [[topic]] = await db.query(
+        `SELECT
+            t.title,
+            u.full_name AS lecturer
+         FROM topics t
+         LEFT JOIN users u
+            ON u.id = t.lecturer_id
+         WHERE t.student_id = ?
+         LIMIT 1`,
+        [studentId]
+    );
+
+    const [[progress]] = await db.query(
+        `SELECT COUNT(*) AS total
+         FROM progress_reports p
+         JOIN topics t
+            ON p.topic_id = t.id
+         WHERE t.student_id = ?`,
+        [studentId]
+    );
+
+    return {
+        topic: topic?.title || "--",
+        lecturer: topic?.lecturer || "--",
+        progress: progress.total
+    };
+};
