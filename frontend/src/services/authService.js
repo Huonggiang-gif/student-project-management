@@ -23,7 +23,6 @@ export async function register(username, password, full_name, email,phone, role)
 
     return response.data;
 }
-
 // Đăng xuất
 export function logout() {
     localStorage.removeItem("token");

@@ -1,36 +1,20 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import AdminDashboard from "../components/dashboard/admin/AdminDashboard";
+import LecturerDashboard from "../components/dashboard/lecturer/LecturerDashboard";
+import StudentDashboard from "../components/dashboard/student/StudentDashboard";
 
 function DashboardPage() {
 
-    const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem("user"));
 
-    useEffect(() => {
+    if (user.role === "admin") {
+        return <AdminDashboard />;
+    }
 
-        const user = JSON.parse(localStorage.getItem("user"));
+    if (user.role === "lecturer") {
+        return <LecturerDashboard />;
+    }
 
-        if (user.role === "admin") {
-
-            navigate("/project");
-
-        }
-
-        if (user.role === "lecturer") {
-
-            navigate("/lecturer/project");
-
-        }
-
-        if (user.role === "student") {
-
-            navigate("/student/project");
-
-        }
-
-    }, []);
-
-    return null;
-
+    return <StudentDashboard />;
 }
 
 export default DashboardPage;

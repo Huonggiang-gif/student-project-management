@@ -7,6 +7,7 @@ import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import ReportPage from "../pages/ReportPage";
 import UserPage from "../pages/UserPage";
+import SettingsPage from "../pages/settingPage";
 
 import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
@@ -40,65 +41,39 @@ function AppRoutes() {
                 <Route element={<ProtectedRoute />}>
                     <Route element={<MainLayout />}>
 
-                        <Route
-                            path="/dashboard"
-                            element={<DashboardPage />}
-                        />
-
-                        <Route
-                            path="/project/create"
-                            element={<TopicCreate />}
-                        />
-
-                        <Route
-                            path="/project/:id"
-                            element={<TopicDetail />}
-                        />
-
-                        <Route
-                            path="/project/edit/:id"
-                            element={<TopicEdit />}
-                        />
-
-                        <Route
-                            path="/task"
-                            element={<Progress />}
-                        />
-
+                        <Route path="/dashboard" element={<DashboardPage />}/>
+                        <Route path="/project/create" element={<TopicCreate />}/>
+                        <Route path="/project/:id"element={<TopicDetail />}/>
+                        <Route path="/project/edit/:id" element={<TopicEdit />}/>
+                        <Route path="/task" element={<Progress />}/>
+                        <Route path="/reports" element={<ReportPage />} />
+                        <Route path="/settings" element={<SettingsPage />} />
+        
                     </Route>
                 </Route>
 
                 {/* Admin */}
                 <Route element={<ProtectedRoute roles={["admin"]} />}>
                     <Route element={<MainLayout />}>
-                        <Route
-                            path="/project"
-                            element={<AdminProject />}
-                        />
-                        <Route
-                            path="/users"
-                            element={<UserPage />}
-                        />
+
+                        <Route path="/project" element={<AdminProject />}/>
+                        <Route path="/users" element={<UserPage />}/>
+   
                     </Route>
                 </Route>
 
                 {/* Lecturer */}
                 <Route element={<ProtectedRoute roles={["lecturer"]} />}>
                     <Route element={<MainLayout />}>
-                        <Route
-                            path="/lecturer/project"
-                            element={<LecturerProject />}
-                        />
+                        <Route path="/lecturer/project" element={<LecturerProject />}/>
+                        
                     </Route>
                 </Route>
 
                 {/* Student */}
                 <Route element={<ProtectedRoute roles={["student"]} />}>
                     <Route element={<MainLayout />}>
-                        <Route
-                            path="/student/project"
-                            element={<StudentProject />}
-                        />
+                        <Route path="/student/project" element={<StudentProject />}/>
                     </Route>
                 </Route>
 

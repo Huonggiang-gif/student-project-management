@@ -54,3 +54,16 @@ export async function updateUserStatus(id, status) {
 
     return response.data;
 }
+//Đổi mật khẩu
+export async function changePassword(oldPassword, newPassword) {
+
+    const response = await api.put(
+        "/users/change-password",
+        {
+            oldPassword,
+            newPassword
+        }
+    );
+
+    return response.data;
+}
