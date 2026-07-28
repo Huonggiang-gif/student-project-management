@@ -1,0 +1,300 @@
+.lecturer-dashboard{
+    padding:32px;
+}
+
+
+/* ================= HEADER ================= */
+
+.lecturer-header{
+    margin-bottom:30px;
+}
+
+
+.lecturer-header h1{
+    font-size:30px;
+    font-weight:700;
+    color:#1e293b;
+    margin-bottom:8px;
+}
+
+
+.lecturer-header p{
+    font-size:16px;
+    color:#64748b;
+}
+
+
+
+/* ================= STATS ================= */
+
+.lecturer-stats{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:25px;
+
+    margin-bottom:35px;
+
+}
+
+
+
+.lecturer-stat-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,0.05);
+
+}
+
+
+
+.stat-icon{
+
+    width:56px;
+
+    height:56px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:24px;
+
+}
+
+
+
+.stat-icon.orange{
+
+    background:#fff1db;
+
+    color:#f59e0b;
+
+}
+
+
+.stat-icon.purple{
+
+    background:#eee7ff;
+
+    color:#7c3aed;
+
+}
+
+
+.stat-icon.blue{
+
+    background:#e0ecff;
+
+    color:#3b82f6;
+
+}
+
+
+
+.lecturer-stat-card p{
+
+    color:#64748b;
+
+    font-size:16px;
+
+    margin-bottom:8px;
+
+}
+
+
+
+.lecturer-stat-card h2{
+
+    font-size:28px;
+
+    color:#1e293b;
+
+    margin:0;
+
+}
+
+
+/* ================= PROJECT TABLE ================= */
+
+
+.lecturer-projects{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:16px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,0.06);
+
+}
+
+
+
+.lecturer-projects h2{
+
+    font-size:22px;
+
+    color:#1e293b;
+
+    margin-bottom:20px;
+
+}
+
+
+
+/* TABLE */
+
+
+.lecturer-projects table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+.lecturer-projects th{
+
+    background:#f8fafc;
+
+    color:#475569;
+
+    font-weight:600;
+
+}
+
+
+
+.lecturer-projects th,
+.lecturer-projects td{
+
+    padding:15px;
+
+    text-align:left;
+
+    border-bottom:1px solid #e2e8f0;
+
+}
+
+
+
+.lecturer-projects td{
+
+    color:#334155;
+
+}
+
+
+
+.lecturer-projects tr:hover{
+
+    background:#f8fafc;
+
+}
+
+
+
+/* STATUS */
+
+
+.project-status{
+
+    display:inline-block;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+    background:#dbeafe;
+
+    color:#2563eb;
+
+}
+
+
+
+/* EMPTY */
+
+.empty-project{
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#94a3b8;
+
+}
+
+
+
+/* ================= RESPONSIVE ================= */
+
+
+@media(max-width:1200px){
+
+
+    .lecturer-stats{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+
+}
+
+
+
+@media(max-width:768px){
+
+
+    .lecturer-dashboard{
+
+        padding:20px;
+
+    }
+
+
+
+    .lecturer-stats{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .lecturer-projects{
+
+        overflow-x:auto;
+
+    }
+
+
+}

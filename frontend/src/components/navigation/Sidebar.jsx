@@ -122,7 +122,7 @@ function Sidebar() {
                 </NavLink>
 
                 <NavLink
-                    to="/report"
+                    to="/reports"
                     className={({ isActive }) =>
                         isActive ? "active" : ""
                     }

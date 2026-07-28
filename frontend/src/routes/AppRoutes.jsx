@@ -17,7 +17,7 @@ import UserPage from "../pages/UserPage";
 import ProgressPage from "../pages/ProgressPage";
 import ReportPage from "../pages/ReportPage";
 import EvaluationPage from "../pages/EvaluationPage";
-
+import SettingsPage from "../pages/settingPage";
 
 /* =======================
         ADMIN

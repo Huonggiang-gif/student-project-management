@@ -11,6 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 const authRoutes = require("./routes/api/auth.route");
+const dashboardRoutes = require("./routes/api/dashboard.routes");
 const topicRoutes = require("./routes/api/topic.route");
 const reportRoute = require("./routes/api/report.route");
 const progressRoute = require("./routes/api/progress.route");
@@ -18,6 +19,7 @@ const evaluationRoute = require("./routes/api/evaluation.route");
 const userRoutes = require("./routes/api/user.route");
 
 app.use("/api/auth", authRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/topics", topicRoutes);
 app.use("/api/reports", reportRoute);
 app.use("/api/progress", progressRoute);

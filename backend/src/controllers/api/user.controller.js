@@ -83,6 +83,18 @@ async function changePassword(req, res) {
                 message: "Vui lòng nhập đầy đủ mật khẩu cũ và mật khẩu mới"
             });
         }
+        // Kiểm tra độ dài mật khẩu
+        if (newPassword.length < 6) {
+            return res.status(400).json({
+                message: "Mật khẩu mới phải có ít nhất 6 ký tự"
+            });
+        }
+        // Không cho phép mật khẩu mới trùng mật khẩu cũ
+        if (oldPassword === newPassword) {
+            return res.status(400).json({
+                message: "Mật khẩu mới không được trùng với mật khẩu cũ"
+            });
+        }
         // Lấy user từ token
         const user = await userModel.getUserByIdWithPassword(req.user.id);
 
