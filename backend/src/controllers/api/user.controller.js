@@ -282,19 +282,15 @@ async function createUser(req, res) {
                 message:"email đã tồn tại"
             });
         }
-        
         // Kiểm tra số điện thoại
         const phoneRegex = /^(03|05|07|08|09)\d{8}$/;
-
         if (!phoneRegex.test(phone)||phone === "0000000000") {
             return res.status(400).json({
                 message: "Số điện thoại không hợp lệ"
             });
         }
-
         // 8. Hash password
         const password_hash = await bcrypt.hash(password,10);
-
         // 9. Lưu database
         const userId = await userModel.createUser(
                 user_code,
@@ -302,8 +298,7 @@ async function createUser(req, res) {
                 full_name,
                 email,
                 phone,
-                role
-                
+                role            
             );
         // 10. Trả kết quả
         return res.status(201).json({
@@ -327,42 +322,30 @@ async function createUser(req, res) {
 }
 // Khóa / Mở tài khoản
 async function updateUserStatus(req, res) {
-
     try {
-
         const { status } = req.body;
         const { id } = req.params;
-
         if (status !== "active" && status !== "inactive") {
             return res.status(400).json({
                 message: "Trạng thái không hợp lệ"
             });
         }
-
         const user = await userModel.getUserById(id);
-
         if (!user) {
             return res.status(404).json({
                 message: "Không tìm thấy người dùng"
             });
         }
-
         await userModel.updateUserStatus(id, status);
-
         res.status(200).json({
             message: `Đã ${status === "active" ? "mở khóa" : "khóa"} tài khoản thành công`
         });
-
     } catch (error) {
-
         console.error(error);
-
         res.status(500).json({
             message: "Lỗi server"
         });
-
     }
-
 }
 module.exports = {
     getAllUsers,

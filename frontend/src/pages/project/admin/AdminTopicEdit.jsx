@@ -64,7 +64,7 @@ function AdminTopicEdit() {
 
             alert("Cập nhật thành công");
 
-            navigate("/project");
+            navigate("/admin/project");
 
         } catch (err) {
 
@@ -176,7 +176,7 @@ function AdminTopicEdit() {
                         <div className="button-group">
 
                             <Link
-                                to="/project"
+                                to="/admin/project"
                                 className="btn-back"
                             >
                                 Quay lại

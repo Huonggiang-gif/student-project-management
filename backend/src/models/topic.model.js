@@ -69,16 +69,29 @@ const Topic = {
         const [rows] = await db.query(`
             SELECT
                 t.*,
-                u.full_name AS student_name
+                u.full_name AS student_name,
+                COALESCE(p.percentage, 0) AS progress
             FROM topics t
             JOIN users u
                 ON t.student_id = u.id
+            LEFT JOIN (
+                SELECT p1.topic_id, p1.percentage
+                FROM progress_reports p1
+                INNER JOIN (
+                    SELECT topic_id, MAX(updated_at) AS latest_time
+                    FROM progress_reports
+                    GROUP BY topic_id
+                ) p2
+                ON p1.topic_id = p2.topic_id
+                AND p1.updated_at = p2.latest_time
+            ) p
+                ON t.id = p.topic_id
             WHERE t.lecturer_id = ?
             ORDER BY t.created_at DESC
         `, [lecturerId]);
+
         return rows;
     },
-
     // ==========================
     // Chi tiết đề tài
     // ==========================
@@ -98,6 +111,13 @@ const Topic = {
             WHERE t.id = ?
         `, [id]);
         return rows[0];
+    },
+
+    // ==========================
+    // Tìm đề tài theo ID
+    // ==========================
+    async findById(id) {
+        return this.getById(id);
     },
 
     // ==========================

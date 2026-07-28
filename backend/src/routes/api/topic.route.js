@@ -69,6 +69,13 @@ router.delete(
     topicController.deleteTopic
 );
 
+router.patch(
+    "/:id/status",
+    authMiddleware,
+    roleMiddleware.authorize("admin", "lecturer"),
+    topicController.updateTopicStatus
+);
+
 // Duyệt đề tài
 router.patch(
     "/:id/approve",
