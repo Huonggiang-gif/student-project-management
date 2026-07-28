@@ -6,6 +6,12 @@ import { FaUsers, FaThLarge, FaFolderOpen,FaTasks,FaChartBar,FaCog,FaSignOutAlt,
 function Sidebar() {
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("user"));
+    const projectPath =
+    user?.role === "admin"
+        ? "/project"
+        : user?.role === "lecturer"
+        ? "/lecturer/project"
+        : "/student/project";
 
     function handleLogout() {
         localStorage.removeItem("token");
@@ -49,7 +55,7 @@ function Sidebar() {
                     </NavLink>
                 )}
                 <NavLink
-                    to="/project"
+                    to={projectPath}
                     className={({ isActive }) =>
                         isActive ? "active" : ""
                     }

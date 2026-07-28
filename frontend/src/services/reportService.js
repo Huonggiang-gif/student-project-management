@@ -1,8 +1,12 @@
 import api from "./api";
-
+// Lấy báo cáo của sinh viên thuộc giảng viên
+export async function getLecturerReports() {
+    const response = await api.get("/reports/lecturer");
+    return response.data;
+}
 // Lấy danh sách báo cáo
-export async function getReports(projectId) {
-    const response = await api.get(`/reports/${projectId}`);
+export async function getReports(topicId) {
+    const response = await api.get(`/reports/topic/${topicId}`);
     return response.data;
 }
 
@@ -11,7 +15,13 @@ export async function getReport(id) {
     const response = await api.get(`/reports/detail/${id}`);
     return response.data;
 }
-
+// Lấy tất cả danh sách báo cáo
+export async function getAllReports() {
+    const response = await api.get(
+        "/reports/admin"
+    );
+    return response.data;
+}
 // Upload báo cáo
 export async function uploadReport(topicId, file) {
     const formData = new FormData();

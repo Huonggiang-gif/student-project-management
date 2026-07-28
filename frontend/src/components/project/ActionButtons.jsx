@@ -1,104 +1,173 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function ActionButtons({
-    topic,
-    role,
-    onDelete,
-    onApprove,
-    onReject
-}) {
 
+    topic,
+
+    role,
+
+    onDelete,
+
+    onApprove,
+
+    onReject
+
+}) {
+    const navigate = useNavigate();
     return (
 
-        <div className="d-flex justify-content-center">
+        <div className="d-flex gap-2">
 
-            {/* Xem chi tiết */}
+            {/* Chi tiết */}
 
             <Link
+
                 to={`/project/${topic.id}`}
-                className="btn btn-outline-primary btn-sm me-1"
+
+                className="btn btn-primary btn-sm"
+
             >
-                <i className="bi bi-eye"></i>
+
+                Xem
+
             </Link>
 
             {/* ================= ADMIN ================= */}
 
-            {role === "admin" && (
+            {
+
+                role === "admin" &&
+
                 <>
 
                     <Link
+
                         to={`/project/edit/${topic.id}`}
-                        className="btn btn-outline-warning btn-sm me-1"
+
+                        className="btn btn-warning btn-sm"
+
                     >
-                        <i className="bi bi-pencil"></i>
+
+                        Sửa
+
                     </Link>
 
                     <button
-                        className="btn btn-outline-danger btn-sm me-1"
+
+                        className="btn btn-danger btn-sm"
+
                         onClick={() => onDelete(topic.id)}
+
                     >
-                        <i className="bi bi-trash"></i>
+
+                        Xóa
+
                     </button>
 
-                    {topic.status === "pending" && (
+                    {
+
+                        topic.status === "waiting_approval" &&
+
                         <>
+
                             <button
-                                className="btn btn-success btn-sm me-1"
+
+                                className="btn btn-success btn-sm"
+
                                 onClick={() => onApprove(topic.id)}
+
                             >
-                                <i className="bi bi-check-lg"></i>
+
+                                Duyệt
+
                             </button>
 
                             <button
+
                                 className="btn btn-secondary btn-sm"
+
                                 onClick={() => onReject(topic.id)}
+
                             >
-                                <i className="bi bi-x-lg"></i>
+
+                                Từ chối
+
                             </button>
+
                         </>
-                    )}
+
+                    }
 
                 </>
-            )}
+
+            }
 
             {/* ================= LECTURER ================= */}
 
             {role === "lecturer" && (
                 <>
-
-                    <Link
-                        to={`/progress/${topic.id}`}
-                        className="btn btn-outline-success btn-sm me-1"
-                        title="Cập nhật tiến độ"
+                    {/* Xem chi tiết */}
+                    <button
+                        className="btn btn-primary btn-sm"
+                        onClick={() => navigate(`/lecturer/project/${topic.id}`)}
+                        title="Xem chi tiết"
                     >
-                        <i className="bi bi-graph-up"></i>
-                    </Link>
+                        <i className="fas fa-eye"></i>
+                    </button>
 
-                    <Link
-                        to={`/evaluation/${topic.id}`}
-                        className="btn btn-outline-info btn-sm"
+                    {/* Đánh giá */}
+                    <button
+                        className="btn btn-outline-warning btn-sm"
+                        onClick={() => navigate(`/evaluation/${topic.id}`)}
                         title="Đánh giá"
                     >
-                        <i className="bi bi-chat-left-text"></i>
-                    </Link>
+                        <i className="fas fa-star"></i>
+                    </button>
 
+                    {/* Duyệt */}
+                    {topic.status === "pending" && (
+                        <>
+                            <button
+                                className="btn btn-success btn-sm"
+                                onClick={() => onApprove(topic.id)}
+                                title="Duyệt"
+                            >
+                                <i className="fas fa-check"></i>
+                            </button>
+
+                            <button
+                                className="btn btn-danger btn-sm"
+                                onClick={() => onReject(topic.id)}
+                                title="Từ chối"
+                            >
+                                <i className="fas fa-times"></i>
+                            </button>
+                        </>
+                    )}
                 </>
             )}
 
             {/* ================= STUDENT ================= */}
 
-            {role === "student" &&
-                (topic.status === "pending" ||
-                    topic.status === "rejected") && (
+            {
 
-                    <Link
-                        to={`/project/edit/${topic.id}`}
-                        className="btn btn-outline-warning btn-sm"
-                    >
-                        <i className="bi bi-pencil"></i>
-                    </Link>
+                role === "student" &&
 
-                )}
+                topic.status === "rejected" &&
+
+                <Link
+
+                    to={`/student/project/edit/${topic.id}`}
+
+                    className="btn btn-warning btn-sm"
+
+                >
+
+                    Sửa
+
+                </Link>
+
+            }
 
         </div>
 

@@ -17,7 +17,7 @@ exports.getTopics = async (req, res) => {
         else if (req.user.role === "student") {
             data = await Topic.getByStudentId(req.user.id);
         }
-
+        console.log(data);
         res.json(data);
 
     }
@@ -31,24 +31,47 @@ exports.getTopics = async (req, res) => {
 
 // Lấy chi tiết
 exports.getTopicById = async (req, res) => {
+
     try {
 
-        const data = await Topic.getById(req.params.id);
+        const topic = await Topic.getById(req.params.id);
 
-        if (!data) {
+        if (!topic) {
             return res.status(404).json({
                 message: "Không tìm thấy đề tài"
             });
         }
 
-        res.json(data);
+        if (
+            req.user.role === "lecturer" &&
+            Number(topic.lecturer_id) !== Number(req.user.id)
+        ) {
+            return res.status(403).json({
+                message: "Bạn không có quyền xem đề tài này."
+            });
+        }
+
+        if (
+            req.user.role === "student" &&
+            Number(topic.student_id) !== Number(req.user.id)
+        ) {
+            return res.status(403).json({
+                message: "Bạn không có quyền xem đề tài này."
+            });
+        }
+
+        res.json(topic);
 
     } catch (err) {
+
         console.log(err);
+
         res.status(500).json({
             message: "Lỗi server"
         });
+
     }
+
 };
 
 // Tạo đề tài
@@ -57,23 +80,22 @@ exports.createTopic = async (req, res) => {
 
         const {
             title,
-            description,
-            student_id,
-            lecturer_id
+            description
         } = req.body;
 
-        const result = await Topic.create([
+
+        const result = await Topic.createTopic([
             title,
             description,
-            student_id,
-            lecturer_id,
             "pending"
         ]);
 
+
         res.status(201).json({
-            message: "Create success",
+            message: "Tạo đề tài thành công",
             id: result.insertId
         });
+
 
     } catch (err) {
 
@@ -82,17 +104,20 @@ exports.createTopic = async (req, res) => {
         res.status(500).json({
             message: "Lỗi server"
         });
-
     }
 };
 
 // Cập nhật đề tài
 exports.updateTopic = async (req, res) => {
-
     try {
-
         const topic = await Topic.getById(req.params.id);
+        if (req.user.role === "lecturer") {
 
+            return res.status(403).json({
+                message: "Giảng viên không được sửa đề tài."
+            });
+
+        }
         if (!topic) {
             return res.status(404).json({
                 message: "Không tìm thấy đề tài"
@@ -135,17 +160,18 @@ exports.updateTopic = async (req, res) => {
                 message: "Cập nhật thành công"
             });
         }
+
         // Giảng viên/Admin chỉ được sửa nội dung khi đề tài chưa thực hiện
         if (
             (req.user.role === "lecturer" || req.user.role === "admin") &&
-            (topic.status === "approved" ||
-                topic.status === "in_progress" ||
-                topic.status === "completed")
+            ["approved", "in_progress", "completed"].includes(topic.status)
         ) {
-
-            // Chỉ cho phép đổi trạng thái
+            if (!req.body.status) {
+                return res.status(400).json({
+                    message: "Thiếu trạng thái."
+                });
+            }
             await Topic.updateStatus(req.params.id, req.body.status);
-
             return res.json({
                 message: "Cập nhật trạng thái thành công"
             });
@@ -203,12 +229,34 @@ exports.deleteTopic = async (req, res) => {
 
 // Duyệt
 exports.approveTopic = async (req, res) => {
+
     try {
 
-        await Topic.updateStatus(req.params.id, "approved");
+        const topic = await Topic.getById(req.params.id);
+
+        if (!topic) {
+            return res.status(404).json({
+                message: "Không tìm thấy đề tài"
+            });
+        }
+
+        // Giảng viên chỉ được duyệt đề tài của mình
+        if (
+            req.user.role === "lecturer" &&
+            Number(topic.lecturer_id) !== Number(req.user.id)
+        ) {
+            return res.status(403).json({
+                message: "Bạn không có quyền duyệt đề tài này."
+            });
+        }
+
+        await Topic.updateStatus(
+            req.params.id,
+            "approved"
+        );
 
         res.json({
-            message: "Approved"
+            message: "Duyệt thành công"
         });
 
     } catch (err) {
@@ -220,16 +268,38 @@ exports.approveTopic = async (req, res) => {
         });
 
     }
+
 };
 
 // Từ chối
 exports.rejectTopic = async (req, res) => {
+
     try {
 
-        await Topic.updateStatus(req.params.id, "rejected");
+        const topic = await Topic.getById(req.params.id);
+
+        if (!topic) {
+            return res.status(404).json({
+                message: "Không tìm thấy đề tài"
+            });
+        }
+
+        if (
+            req.user.role === "lecturer" &&
+            Number(topic.lecturer_id) !== Number(req.user.id)
+        ) {
+            return res.status(403).json({
+                message: "Bạn không có quyền từ chối đề tài này."
+            });
+        }
+
+        await Topic.updateStatus(
+            req.params.id,
+            "rejected"
+        );
 
         res.json({
-            message: "Rejected"
+            message: "Đã từ chối đề tài"
         });
 
     } catch (err) {
@@ -241,4 +311,115 @@ exports.rejectTopic = async (req, res) => {
         });
 
     }
+
+};
+
+exports.getStudentsOfLecturer = async (req, res) => {
+
+    try {
+
+        if (req.user.role !== "lecturer") {
+
+            return res.status(403).json({
+                message: "Không có quyền"
+            });
+
+        }
+
+        const data = await Topic.getStudentsOfLecturer(req.user.id);
+
+        res.json(data);
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).json({
+            message: "Lỗi server"
+        });
+
+    }
+
+}
+
+exports.getAvailableTopics = async (req, res) => {
+
+    try {
+
+        const data = await Topic.getAvailableTopics();
+        console.log("Available Topics:", data);
+        res.json(data);
+
+    }
+
+    catch (err) {
+
+        console.log(err);
+
+        res.status(500).json({
+
+            message: "Lỗi server"
+
+        });
+
+    }
+
+};
+
+exports.registerTopic = async (req, res) => {
+
+    try {
+
+        const studentId = req.user.id;
+
+        const {
+
+            topic_id,
+
+            lecturer_id
+
+        } = req.body;
+
+        const existed = await Topic.checkStudentHasTopic(studentId);
+
+        if (existed) {
+
+            return res.status(400).json({
+
+                message: "Bạn đã có đề tài"
+
+            });
+
+        }
+
+        await Topic.registerTopic(
+
+            topic_id,
+
+            studentId,
+
+            lecturer_id
+
+        );
+
+        res.json({
+
+            message: "Đăng ký thành công"
+
+        });
+
+    }
+
+    catch (err) {
+
+        console.log(err);
+
+        res.status(500).json({
+
+            message: "Lỗi server"
+
+        });
+
+    }
+
 };

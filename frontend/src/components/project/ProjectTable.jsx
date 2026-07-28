@@ -1,28 +1,33 @@
-import ActionButtons from "./ActionButtons";
 import StatusBadge from "./StatusBadge";
+import ActionButtons from "./ActionButtons";
 
 function ProjectTable({
+
     topics,
+
     role,
+
     onDelete,
+
     onApprove,
+
     onReject
+
 }) {
-    
 
     return (
 
         <div className="table-responsive">
 
-            <table className="table table-hover align-middle">
+            <table className="table table-bordered table-hover">
 
-                <thead className="table-light">
+                <thead>
 
                     <tr>
 
-                        <th>#</th>
+                        <th>ID</th>
 
-                        <th>Tên đề tài</th>
+                        <th>Đề tài</th>
 
                         <th>Sinh viên</th>
 
@@ -30,7 +35,7 @@ function ProjectTable({
 
                         <th>Trạng thái</th>
 
-                        <th className="text-center">
+                        <th width="220">
                             Thao tác
                         </th>
 
@@ -40,110 +45,80 @@ function ProjectTable({
 
                 <tbody>
 
-                    {topics.length === 0 ? (
+                    {
 
-                        <tr>
+                        topics.length === 0 ?
 
-                            <td
-                                colSpan="6"
-                                className="text-center py-4"
-                            >
-                                Không có đề tài nào
-                            </td>
+                            (
 
-                        </tr>
+                                <tr>
 
-                    ) : (
+                                    <td
+                                        colSpan="6"
+                                        className="text-center"
+                                    >
 
-                        topics.map((topic, index) => (
+                                        Không có dữ liệu
 
-                            <tr key={topic.id}>
+                                    </td>
 
-                                <td>{index + 1}</td>
+                                </tr>
 
-                                <td>
+                            )
 
-                                    <strong>
-                                        {topic.title}
-                                    </strong>
+                            :
 
-                                    <br />
+                            topics.map(topic => (
 
-                                    <small className="text-muted">
+                                <tr key={topic.id}>
 
-                                        ID: {topic.id}
+                                    <td>{topic.id}</td>
 
-                                    </small>
+                                    <td>{topic.title}</td>
 
-                                </td>
+                                    <td>
 
-                                <td>
+                                        {topic.student_name || "-"}
 
-                                    <div className="d-flex align-items-center">
+                                    </td>
 
-                                        <div className="student-avatar">
+                                    <td>
 
-                                            {topic.student_name
-                                                ?.charAt(0)
-                                                .toUpperCase()}
+                                        {topic.lecturer_name || "-"}
 
-                                        </div>
+                                    </td>
 
-                                        <div className="ms-2">
+                                    <td>
 
-                                            <strong>
+                                        <StatusBadge
+                                            status={topic.status}
+                                        />
 
-                                                {topic.student_name}
+                                    </td>
 
-                                            </strong>
+                                    <td>
 
-                                            <br />
+                                        <ActionButtons
 
-                                            <small className="text-muted">
+                                            topic={topic}
 
-                                                {topic.student_code}
+                                            role={role}
 
-                                            </small>
+                                            onDelete={onDelete}
 
-                                        </div>
+                                            onApprove={onApprove}
 
-                                    </div>
+                                            onReject={onReject}
 
-                                </td>
+                                        />
 
-                                <td>
+                                    </td>
 
-                                    {topic.lecturer_name}
+                                </tr>
 
-                                </td>
+                            ))
 
-                                <td>
-                                    <StatusBadge status={topic.status} />
-                                </td>
-
-                                <td className="text-center">
-
-                                    <ActionButtons
-
-                                        topic={topic}
-
-                                        role={role}
-
-                                        onDelete={onDelete}
-
-                                        onApprove={onApprove}
-
-                                        onReject={onReject}
-
-                                    />
-
-                                </td>
-
-                            </tr>
-
-                        ))
-
-                    )}
+                    }
 
                 </tbody>
 

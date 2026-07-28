@@ -9,31 +9,44 @@ import "../../../styles/topic.css";
 function LecturerProject() {
 
     const [topics, setTopics] = useState([]);
+
     const [keyword, setKeyword] = useState("");
+
     const [status, setStatus] = useState("");
 
     useEffect(() => {
         loadTopics();
     }, []);
 
-    const loadTopics = async () => {
-        try {
-            const res = await topicService.getAll();
+    async function loadTopics() {
 
-            // Sau này backend có API riêng thì thay bằng getByLecturer()
-            setTopics(res.data);
+        try {
+            // Khi có API riêng:
+            // topicService.getLecturerTopics();
+            const data = await topicService.getAll();
+
+            setTopics(data);
 
         } catch (err) {
+
             console.log(err);
+
         }
-    };
+
+    }
 
     const filteredTopics = topics.filter((topic) => {
 
-        return (
-            topic.title.toLowerCase().includes(keyword.toLowerCase()) &&
-            (status === "" || topic.status === status)
-        );
+        const matchKeyword =
+            topic.title.toLowerCase().includes(
+                keyword.toLowerCase()
+            );
+
+        const matchStatus =
+            status === "" ||
+            topic.status === status;
+
+        return matchKeyword && matchStatus;
 
     });
 
@@ -43,9 +56,25 @@ function LecturerProject() {
 
             <div className="topic-card">
 
-                <h2 className="fw-bold">
-                    Đề tài hướng dẫn
-                </h2>
+                <div className="d-flex justify-content-between align-items-center mb-4">
+
+                    <div>
+
+                        <h2 className="fw-bold">
+
+                            Đề tài hướng dẫn
+
+                        </h2>
+
+                        <small className="text-muted">
+
+                            Tổng số: {filteredTopics.length}
+
+                        </small>
+
+                    </div>
+
+                </div>
 
                 <ProjectToolbar
 

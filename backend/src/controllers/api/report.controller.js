@@ -2,9 +2,9 @@ const reportModel = require("../../models/report.model")
 
 // Lấy danh sách báo cáo theo đề tài
 async function getReports(req, res) {
-    const { projectId } = req.params
+    const { topic_id } = req.params
     try {
-        const reports = await reportModel.findReportsByTopic(projectId)
+        const reports = await reportModel.findReportsByTopic(topic_id)
         res.json(reports)
     } catch (error) {
         console.log(error)
@@ -35,7 +35,48 @@ async function getReportById(req, res) {
         })
     }
 }
+// Lấy báo cáo của sinh viên thuộc giảng viên
+async function getReportsByLecturer(req, res) {
 
+    try {
+
+        const lecturer_id = req.user.id
+
+        const reports = await reportModel.findReportsByLecturer(
+            lecturer_id
+        )
+
+        res.json(reports)
+
+    } catch (error) {
+
+        console.log(error)
+
+        res.status(500).json({
+            success: false,
+            message: "Lỗi khi lấy báo cáo của giảng viên"
+        })
+
+    }
+}
+// Xem tất cả báo cáo
+async function getAllReports(req, res) {
+
+    try {
+
+        const reports = await reportModel.getAllReports();
+
+        res.json(reports);
+
+    } catch (error) {
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
 // Nộp báo cáo
 async function createReport(req, res) {
     try {
@@ -156,6 +197,8 @@ async function deleteReport(req, res) {
 module.exports = {
     getReports,
     getReportById,
+    getReportsByLecturer,
+    getAllReports,
     createReport,
     updateStatus,
     deleteReport

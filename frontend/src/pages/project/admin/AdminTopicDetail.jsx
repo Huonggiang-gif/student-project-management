@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import topicService from "../../services/topicService";
-import StatusBadge from "../../components/project/StatusBadge";
-import "../../styles/projectCreate.css";
 
-function TopicDetail() {
+import topicService from "../../../services/topicService";
+
+import StatusBadge from "../../../components/project/StatusBadge";
+
+import "../../../styles/projectCreate.css";
+
+function AdminTopicDetail() {
 
     const { id } = useParams();
 
@@ -16,33 +19,33 @@ function TopicDetail() {
         loadTopic();
     }, []);
 
-    const loadTopic = async () => {
+    async function loadTopic() {
 
         try {
 
-            const res = await topicService.getById(id);
+            const topic = await topicService.getById(id);
 
-            setTopic(res.data);
+            setTopic(topic);
 
-        } catch (error) {
+        } catch (err) {
 
-            console.log(error);
+            console.log(err);
 
         }
 
-    };
+    }
 
     if (!topic) {
 
         return (
             <div className="text-center mt-5">
-                <h4>Đang tải dữ liệu...</h4>
+
+                <h4>Đang tải...</h4>
+
             </div>
         );
 
     }
-
-
 
     return (
 
@@ -52,35 +55,29 @@ function TopicDetail() {
 
                 <div className="project-card-header">
 
-                    <h2>📄 Chi tiết đề tài</h2>
-
-                    <p>
-                        Xem đầy đủ thông tin của đề tài.
-                    </p>
+                    <h2>Chi tiết đề tài</h2>
 
                 </div>
 
                 <div className="project-card-body">
 
-                    <div className="row mb-4">
+                    <div className="row mb-3">
 
                         <div className="col-md-6">
 
-                            <label className="fw-bold">
-                                Tên đề tài
-                            </label>
+                            <label>Tên đề tài</label>
 
                             <div className="form-control bg-light">
+
                                 {topic.title}
+
                             </div>
 
                         </div>
 
                         <div className="col-md-6">
 
-                            <label className="fw-bold">
-                                Trạng thái
-                            </label>
+                            <label>Trạng thái</label>
 
                             <div>
 
@@ -92,79 +89,73 @@ function TopicDetail() {
 
                     </div>
 
-                    <div className="row mb-4">
+                    <div className="row mb-3">
 
                         <div className="col-md-6">
 
-                            <label className="fw-bold">
-                                Sinh viên
-                            </label>
+                            <label>Sinh viên</label>
 
                             <div className="form-control bg-light">
-                                {topic.student_name}
+
+                                {topic.student_name || "Chưa có"}
+
                             </div>
 
                         </div>
 
                         <div className="col-md-6">
 
-                            <label className="fw-bold">
-                                Giảng viên hướng dẫn
-                            </label>
+                            <label>Giảng viên</label>
 
                             <div className="form-control bg-light">
-                                {topic.lecturer_name}
+
+                                {topic.lecturer_name || "Chưa có"}
+
                             </div>
 
                         </div>
 
                     </div>
 
-                    <div className="mb-4">
+                    <div className="mb-3">
 
-                        <label className="fw-bold">
-                            Mô tả đề tài
-                        </label>
+                        <label>Mô tả</label>
 
                         <textarea
-                            className="form-control"
                             rows="6"
+                            className="form-control"
                             value={topic.description || ""}
                             readOnly
                         />
 
                     </div>
 
-                    <div className="mb-4">
+                    <div className="mb-3">
 
-                        <label className="fw-bold">
-                            Ngày tạo
-                        </label>
+                        <label>Ngày tạo</label>
 
                         <div className="form-control bg-light">
 
-                            {topic.created_at
-                                ? new Date(topic.created_at).toLocaleDateString("vi-VN")
-                                : "Chưa có"}
+                            {new Date(topic.created_at).toLocaleDateString("vi-VN")}
 
                         </div>
 
                     </div>
 
-                    <div className="d-flex justify-content-end gap-3">
+                    <div className="d-flex justify-content-end gap-2">
 
                         <button
                             className="btn btn-secondary"
                             onClick={() => navigate("/project")}
                         >
-                            ← Quay lại
+                            Quay lại
                         </button>
 
                         <button
                             className="btn btn-warning"
                             onClick={() => navigate(`/project/edit/${id}`)}
                         >
-                            ✏️ Chỉnh sửa
+                            Chỉnh sửa
                         </button>
 
                     </div>
@@ -179,4 +170,4 @@ function TopicDetail() {
 
 }
 
-export default TopicDetail;
+export default AdminTopicDetail;

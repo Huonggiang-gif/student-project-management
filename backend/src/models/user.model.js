@@ -1,13 +1,17 @@
 const db = require("../config/db")
 const bcrypt = require("bcrypt")
 
+// user.model.js
 async function findUserByUsercode(user_code) {
     const [users] = await db.query(
-        "SELECT * FROM users WHERE user_code = ?",
+        `SELECT u.*, t.id AS topic_id 
+         FROM users u 
+         LEFT JOIN topics t ON t.student_id = u.id 
+         WHERE u.user_code = ?`,
         [user_code]
-    )
+    );
 
-    return users[0] || null
+    return users[0] || null;
 }
 
 async function findUserByEmail(email) {

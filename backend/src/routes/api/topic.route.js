@@ -5,6 +5,7 @@ const topicController = require("../../controllers/api/topic.controller");
 const { authMiddleware } = require("../../middleware/auth.middleware");
 const roleMiddleware = require("../../middleware/role.middleware");
 
+console.log("Topic Route Loaded");
 // Lấy danh sách đề tài
 router.get(
     "/",
@@ -17,19 +18,38 @@ router.get(
     topicController.getTopics
 );
 
-// Lấy chi tiết đề tài
 router.get(
-    "/:id",
+
+    "/available",
+
     authMiddleware,
-    roleMiddleware.authorize("admin", "lecturer", "student"),
-    topicController.getTopicById
+
+    roleMiddleware.authorize("student"),
+
+    topicController.getAvailableTopics
+
 );
 
-// Sinh viên đăng ký đề tài
+
+
+router.post(
+
+    "/register",
+
+    authMiddleware,
+
+    roleMiddleware.authorize("student"),
+
+    topicController.registerTopic
+
+);
+
+
+// Tạo đề tài
 router.post(
     "/",
     authMiddleware,
-    roleMiddleware.authorize("student"),
+    roleMiddleware.authorize("admin"),
     topicController.createTopic
 );
 
@@ -37,7 +57,7 @@ router.post(
 router.put(
     "/:id",
     authMiddleware,
-    roleMiddleware.authorize("admin", "student"),
+    roleMiddleware.authorize("admin", "lecturer", "student"),
     topicController.updateTopic
 );
 
@@ -53,7 +73,7 @@ router.delete(
 router.patch(
     "/:id/approve",
     authMiddleware,
-    roleMiddleware.authorize("admin"),
+    roleMiddleware.authorize("admin", "lecturer"),
     topicController.approveTopic
 );
 
@@ -61,8 +81,18 @@ router.patch(
 router.patch(
     "/:id/reject",
     authMiddleware,
-    roleMiddleware.authorize("admin"),
+    roleMiddleware.authorize("admin", "lecturer"),
     topicController.rejectTopic
+);
+
+
+
+// Lấy chi tiết đề tài
+router.get(
+    "/:id",
+    authMiddleware,
+    roleMiddleware.authorize("admin", "lecturer", "student"),
+    topicController.getTopicById
 );
 
 module.exports = router;

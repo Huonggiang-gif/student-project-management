@@ -26,15 +26,16 @@ function StudentProject() {
 
         try {
 
-            const res = await topicService.getAll();
+            // API lấy đề tài của sinh viên
+            const data = await topicService.getAll();
 
-            // Sau này backend có API của sinh viên thì thay
-
-            setTopics(res.data);
+            setTopics(data);
 
         } catch (err) {
 
             console.log(err);
+
+            setTopics([]);
 
         }
 
@@ -42,13 +43,13 @@ function StudentProject() {
 
     const filteredTopics = topics.filter((topic) => {
 
-        return (
+        const matchKeyword =
+            topic.title.toLowerCase().includes(keyword.toLowerCase());
 
-            topic.title.toLowerCase().includes(keyword.toLowerCase()) &&
+        const matchStatus =
+            status === "" || topic.status === status;
 
-            (status === "" || topic.status === status)
-
-        );
+        return matchKeyword && matchStatus;
 
     });
 
@@ -58,23 +59,41 @@ function StudentProject() {
 
             <div className="topic-card">
 
-                <h2 className="fw-bold">
+                <div className="d-flex justify-content-between align-items-center mb-4">
 
-                    Đề tài của tôi
+                    <div>
 
-                </h2>
+                        <h2 className="fw-bold">
+
+                            Đề tài của tôi
+
+                        </h2>
+
+                        <small className="text-muted">
+
+                            {filteredTopics.length} đề tài
+
+                        </small>
+
+                    </div>
+
+                </div>
 
                 <ProjectToolbar
 
                     keyword={keyword}
+
                     setKeyword={setKeyword}
 
                     status={status}
+
                     setStatus={setStatus}
 
                     role="student"
 
-                    onCreate={() => navigate("/project/create")}
+                    onCreate={() =>
+                        navigate("/student/register-topic")
+                    }
 
                 />
 

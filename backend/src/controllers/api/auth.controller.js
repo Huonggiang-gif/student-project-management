@@ -57,7 +57,8 @@ async function login(req, res) {
                 id: user.id,
                 username:user.user_code,
                 full_name: user.full_name,
-                role:user.role
+                role:user.role,
+                topic_id: user.topic_id
             }
         })
 
