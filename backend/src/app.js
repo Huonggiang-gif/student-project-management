@@ -7,6 +7,7 @@ const app = express();
 // Cho phép frontend truy cập
 app.use(cors());
 
+// Parse JSON
 app.use(express.json());
 
 const authRoutes = require("./routes/api/auth.route");

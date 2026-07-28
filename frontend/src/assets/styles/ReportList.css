@@ -1,0 +1,44 @@
+.report-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:25px;
+    background:#fff;
+}
+
+.report-table th{
+    background:#2563eb;
+    color:#fff;
+    padding:14px;
+    text-align:center;
+}
+
+.report-table td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+}
+
+.report-table tr:hover{
+    background:#f8fafc;
+}
+
+.action-btns{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+
+.status-submitted{
+    color:#2563eb;
+    font-weight:bold;
+}
+
+.status-reviewed{
+    color:#16a34a;
+    font-weight:bold;
+}
+
+.status-revision{
+    color:#dc2626;
+    font-weight:bold;
+}

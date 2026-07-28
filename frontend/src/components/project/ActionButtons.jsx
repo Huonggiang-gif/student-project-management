@@ -20,18 +20,6 @@ function ActionButtons({
 
             {/* Chi tiết */}
 
-            <Link
-
-                to={`/project/${topic.id}`}
-
-                className="btn btn-primary btn-sm"
-
-            >
-
-                Xem
-
-            </Link>
-
             {/* ================= ADMIN ================= */}
 
             {
@@ -107,43 +95,53 @@ function ActionButtons({
             {role === "lecturer" && (
                 <>
                     {/* Xem chi tiết */}
-                    <button
-                        className="btn btn-primary btn-sm"
-                        onClick={() => navigate(`/lecturer/project/${topic.id}`)}
+                    <Link
+                        to={`/lecturer/project/${topic.id}`}
+                        className="btn btn-outline-primary btn-sm"
                         title="Xem chi tiết"
                     >
-                        <i className="fas fa-eye"></i>
-                    </button>
+                        <i className="bi bi-eye"></i>
+                    </Link>
 
-                    {/* Đánh giá */}
-                    <button
-                        className="btn btn-outline-warning btn-sm"
-                        onClick={() => navigate(`/evaluation/${topic.id}`)}
-                        title="Đánh giá"
+                    {/* tiến độ dự án */}
+                    <Link
+                        to={`/progress/${topic.id}`}
+                        className="btn btn-outline-info btn-sm"
+                        title="Tiến độ dự án"
                     >
-                        <i className="fas fa-star"></i>
-                    </button>
+                        <i className="fas fa-chart-line"></i>
+                    </Link>
 
                     {/* Duyệt */}
                     {topic.status === "pending" && (
-                        <>
-                            <button
-                                className="btn btn-success btn-sm"
-                                onClick={() => onApprove(topic.id)}
-                                title="Duyệt"
-                            >
-                                <i className="fas fa-check"></i>
-                            </button>
-
-                            <button
-                                className="btn btn-danger btn-sm"
-                                onClick={() => onReject(topic.id)}
-                                title="Từ chối"
-                            >
-                                <i className="fas fa-times"></i>
-                            </button>
-                        </>
+                        <button
+                            className="btn btn-success btn-sm"
+                            onClick={() => onApprove(topic.id)}
+                            title="Duyệt"
+                        >
+                            <i className="bi bi-check-lg"></i>
+                        </button>
                     )}
+
+                    {/* Từ chối */}
+                    {topic.status === "pending" && (
+                        <button
+                            className="btn btn-danger btn-sm"
+                            onClick={() => onReject(topic.id)}
+                            title="Từ chối"
+                        >
+                            <i className="bi bi-x-lg"></i>
+                        </button>
+                    )}
+
+                    {/* Đánh giá */}
+                    <Link
+                        to={`/evaluation/${topic.id}`}
+                        className="btn btn-warning btn-sm"
+                        title="Đánh giá"
+                    >
+                        <i className="bi bi-star-fill"></i>
+                    </Link>
                 </>
             )}
 

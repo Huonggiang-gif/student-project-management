@@ -6,6 +6,11 @@ export async function getUsers() {
 
     return response.data;
 }
+//Xem chi tiết người dùng
+export async function getUserById(id) {
+    const response = await api.get(`/users/${id}`);
+    return response.data;
+}
 
 // Tìm kiếm người dùng
 export async function searchUsers(keyword) {

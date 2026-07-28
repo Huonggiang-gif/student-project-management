@@ -1,0 +1,61 @@
+.modal-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.4);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999;
+
+}
+
+.comment-modal{
+
+    width:520px;
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:12px;
+
+}
+
+.comment-modal h2{
+
+    margin-bottom:20px;
+
+}
+
+.comment-modal textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    resize:vertical;
+
+}
+
+.modal-buttons{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:10px;
+
+    margin-top:20px;
+
+}

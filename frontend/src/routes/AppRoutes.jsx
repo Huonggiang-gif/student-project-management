@@ -83,9 +83,39 @@ function AppRoutes() {
                             element={<DashboardPage />}
                         />
 
+                        {/* Report */}
+                        <Route
+                            path="/report"
+                            element={<ReportPage />}
+                        />
+
+                        {/* Evaluation */}
+                        <Route
+                            path="/evaluation"
+                            element={<EvaluationPage />}
+                        />
+
+                        {/* Progress */}
                         <Route
                             path="/task"
-                            element={<Progress />}
+                            element={<ProgressPage />}
+                        />
+
+                        {/* Topic  path="/task"
+                            element={<Progress />}*/}
+                        <Route
+                            path="/project/create"
+                            element={<TopicCreate />}
+                        />
+
+                        <Route
+                            path="/project/:id"
+                            element={<TopicDetail />}
+                        />
+
+                        <Route
+                            path="/project/edit/:id"
+                            element={<TopicEdit />}
                         />
 
                     </Route>

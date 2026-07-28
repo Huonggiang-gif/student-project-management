@@ -54,7 +54,7 @@ const Topic = {
                 t.*,
                 u.full_name AS lecturer_name
             FROM topics t
-            JOIN users u
+            LEFT JOIN users u
                 ON t.lecturer_id = u.id
             WHERE t.student_id = ?
             ORDER BY t.created_at DESC
@@ -162,6 +162,28 @@ const Topic = {
             WHERE id = ?
             `,
             [status, id]
+        );
+        return result;
+    },
+
+    // ==========================
+    // Đánh giá đề tài
+    // ==========================
+    async reviewTopic(id, score, review) {
+        const [result] = await db.query(
+            `
+        UPDATE topics
+        SET
+            score=?,
+            review=?,
+            reviewed_at=NOW()
+        WHERE id=?
+        `,
+            [
+                score,
+                review,
+                id
+            ]
         );
         return result;
     },
