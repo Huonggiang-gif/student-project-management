@@ -7,16 +7,17 @@ import {
 
 import ProtectedRoute from "./ProtectetedRoute";
 
+import AuthLayout from "../layouts/AuthLayout";
+import MainLayout from "../layouts/MainLayout";
+
 import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
-import ReportPage from "../pages/ReportPage";
 import UserPage from "../pages/UserPage";
+import ProgressPage from "../pages/ProgressPage";
+import ReportPage from "../pages/ReportPage";
+import EvaluationPage from "../pages/EvaluationPage";
 import SettingsPage from "../pages/settingPage";
-import Progress from "../pages/progress/Progress";
-
-import AuthLayout from "../layouts/AuthLayout";
-import MainLayout from "../layouts/MainLayout";
 
 import AdminProject from "../pages/project/admin/AdminProject";
 import AdminTopicCreate from "../pages/project/admin/AdminTopicCreate";
@@ -30,7 +31,6 @@ import StudentProject from "../pages/project/student/StudentProject";
 import StudentRegisterTopic from "../pages/project/student/StudentRegisterTopic";
 import StudentTopicDetail from "../pages/project/student/StudentTopicDetail";
 import StudentTopicEdit from "../pages/project/student/StudentTopicEdit";
-
 function AppRoutes() {
 
     return (
@@ -65,11 +65,28 @@ function AppRoutes() {
 
                     <Route element={<MainLayout />}>
 
-                        <Route path="/dashboard" element={<DashboardPage />}/>
-                        <Route path="/task" element={<Progress />}/>
-                        <Route path="/reports" element={<ReportPage />} />
-                        <Route path="/settings" element={<SettingsPage />} />
+                        <Route
+                            path="/dashboard"
+                            element={<DashboardPage />}
+                        />
 
+                        {/* Report */}
+                        <Route
+                            path="/reports"
+                            element={<ReportPage />}
+                        />
+
+                        {/* Evaluation */}
+                        <Route
+                            path="/evaluation"
+                            element={<EvaluationPage />}
+                        />
+
+                        {/* Progress */}
+                        <Route
+                            path="/task"
+                            element={<ProgressPage />}
+                        />
                     </Route>
 
                 </Route>

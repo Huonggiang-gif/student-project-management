@@ -41,7 +41,7 @@ function ProjectToolbar({
                         Tất cả
                     </option>
 
-                    <option value="pending">
+                    <option value="waiting_approval">
                         Chờ duyệt
                     </option>
 

@@ -5,5 +5,4 @@ const db = mysql.createPool({
     password: "Hgiang#123",
     database: "studentprojectdb"
 })
-
 module.exports = db;

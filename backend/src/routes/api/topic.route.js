@@ -85,7 +85,15 @@ router.patch(
     topicController.rejectTopic
 );
 
-
+router.patch(
+    "/:id/review",
+    authMiddleware,
+    roleMiddleware.authorize(
+        "lecturer",
+        "admin"
+    ),
+    topicController.reviewTopic
+);
 
 // Lấy chi tiết đề tài
 router.get(

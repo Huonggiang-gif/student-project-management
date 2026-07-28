@@ -23,9 +23,9 @@ function LecturerTopicDetail() {
 
         try {
 
-            const res = await topicService.getById(id);
+            const data = await topicService.getById(id);
 
-            setTopic(res.data);
+            setTopic(data);
 
         }
 

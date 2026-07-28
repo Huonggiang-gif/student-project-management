@@ -32,6 +32,7 @@ function ProjectTable({
                         <th>Sinh viên</th>
 
                         <th>Giảng viên</th>
+                        <th>Tiến độ</th>
 
                         <th>Trạng thái</th>
 
@@ -85,6 +86,29 @@ function ProjectTable({
                                     <td>
 
                                         {topic.lecturer_name || "-"}
+
+                                    </td>
+                                    <td width="180">
+
+                                        <div className="progress">
+
+                                            <div
+
+                                                className="progress-bar"
+
+                                                role="progressbar"
+
+                                                style={{
+                                                    width: `${topic.progress || 0}%`
+                                                }}
+
+                                            >
+
+                                                {topic.progress || 0}%
+
+                                            </div>
+
+                                        </div>
 
                                     </td>
 

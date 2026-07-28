@@ -1,0 +1,45 @@
+.evaluation-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+    background:#fff;
+
+}
+
+.evaluation-table th{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    padding:12px;
+
+}
+
+.evaluation-table td{
+
+    padding:10px;
+
+    border-bottom:1px solid #eee;
+
+    text-align:center;
+
+}
+
+.evaluation-table input{
+
+    width:70px;
+
+    padding:5px;
+
+}
+
+.evaluation-table tr:hover{
+
+    background:#f8fafc;
+
+}

@@ -35,6 +35,45 @@ function LecturerProject() {
 
     }
 
+    async function handleApprove(id) {
+
+        try {
+
+            await topicService.approve(id);
+
+            alert("Đã duyệt đề tài");
+
+            loadTopics();
+
+        } catch (err) {
+
+            console.log(err);
+
+            alert("Duyệt thất bại");
+
+        }
+
+    }
+
+    async function handleReject(id) {
+
+        try {
+
+            await topicService.reject(id);
+
+            alert("Đã từ chối đề tài");
+
+            loadTopics();
+
+        } catch (err) {
+
+            console.log(err);
+
+            alert("Từ chối thất bại");
+
+        }
+
+    }
     const filteredTopics = topics.filter((topic) => {
 
         const matchKeyword =
@@ -91,8 +130,9 @@ function LecturerProject() {
                 <ProjectTable
 
                     topics={filteredTopics}
-
                     role="lecturer"
+                    onApprove={handleApprove}
+                    onReject={handleReject}
 
                 />
 

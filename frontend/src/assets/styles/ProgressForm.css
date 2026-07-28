@@ -1,0 +1,44 @@
+.progress-form{
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    margin-bottom:30px;
+}
+
+.progress-form h2{
+    margin-bottom:20px;
+}
+
+.progress-form .form-group{
+    margin-bottom:18px;
+}
+
+.progress-form label{
+    display:block;
+    font-weight:600;
+    margin-bottom:8px;
+}
+
+.progress-form input,
+.progress-form textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+}
+
+.progress-form textarea{
+    resize:vertical;
+}
+
+.progress-form input:focus,
+.progress-form textarea:focus{
+    border-color:#2563eb;
+}
+
+.progress-form button{
+    margin-top:10px;
+}

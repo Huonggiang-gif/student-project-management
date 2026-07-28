@@ -1,0 +1,35 @@
+.progress-table{
+    width:100%;
+    margin-top:25px;
+    border-collapse:collapse;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.progress-table th{
+    background:#2563eb;
+    color:#fff;
+    padding:14px;
+}
+
+.progress-table td{
+    padding:14px;
+    border-bottom:1px solid #eee;
+    text-align:center;
+}
+
+.progress-table tr:hover{
+    background:#f8fafc;
+}
+
+.no-comment{
+    color:#999;
+    font-style:italic;
+}
+
+.action-btns{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
