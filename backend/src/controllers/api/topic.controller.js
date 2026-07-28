@@ -149,6 +149,16 @@ exports.updateTopic = async (req, res) => {
         // =============================
         // Quyền của giảng viên/Admin
         // =============================
+
+        // Nếu admin chỉnh sửa đề tài đã được duyệt
+        // thì đưa về chờ duyệt lại
+        let status = req.body.status;
+        if (
+            req.user.role === "admin" &&
+            req.body.status === "waiting_approval"
+        ) {
+            status = "waiting_approval";
+        }
         const data = [
             req.body.title,
             req.body.description,
@@ -200,7 +210,7 @@ exports.approveTopic = async (req, res) => {
                 message: "Bạn không có quyền duyệt đề tài này."
             });
         }
-        if (topic.status !== "pending") {
+        if (topic.status !== "waiting_approval") {
             return res.status(400).json({
                 message: "Đề tài đã được xử lý."
             });
@@ -237,7 +247,7 @@ exports.rejectTopic = async (req, res) => {
                 message: "Bạn không có quyền từ chối đề tài này."
             });
         }
-        if (topic.status !== "pending") {
+        if (topic.status !== "waiting_approval") {
             return res.status(400).json({
                 message: "Đề tài đã được xử lý."
             });

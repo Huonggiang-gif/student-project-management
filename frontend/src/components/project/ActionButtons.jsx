@@ -113,7 +113,7 @@ function ActionButtons({
                     </Link>
 
                     {/* Duyệt */}
-                    {topic.status === "pending" && (
+                    {topic.status === "waiting_approval" && (
                         <button
                             className="btn btn-success btn-sm"
                             onClick={() => onApprove(topic.id)}
@@ -124,7 +124,7 @@ function ActionButtons({
                     )}
 
                     {/* Từ chối */}
-                    {topic.status === "pending" && (
+                    {topic.status === "waiting_approval" && (
                         <button
                             className="btn btn-danger btn-sm"
                             onClick={() => onReject(topic.id)}

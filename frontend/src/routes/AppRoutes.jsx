@@ -14,7 +14,10 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import UserPage from "../pages/UserPage";
-import Progress from "../pages/progress/Progress";
+import ProgressPage from "../pages/ProgressPage";
+import ReportPage from "../pages/ReportPage";
+import EvaluationPage from "../pages/EvaluationPage";
+
 
 /* =======================
         ADMIN
@@ -100,24 +103,7 @@ function AppRoutes() {
                             path="/task"
                             element={<ProgressPage />}
                         />
-
-                        {/* Topic  path="/task"
-                            element={<Progress />}*/}
-                        <Route
-                            path="/project/create"
-                            element={<TopicCreate />}
-                        />
-
-                        <Route
-                            path="/project/:id"
-                            element={<TopicDetail />}
-                        />
-
-                        <Route
-                            path="/project/edit/:id"
-                            element={<TopicEdit />}
-                        />
-
+        
                     </Route>
 
                 </Route>

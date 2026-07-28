@@ -249,7 +249,7 @@ const Topic = {
         SET
             student_id = ?,
             lecturer_id = ?,
-            status = 'pending'
+            status = 'waiting_approval'
         WHERE id = ?
         `,
             [
