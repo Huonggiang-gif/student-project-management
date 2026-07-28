@@ -1,195 +1,145 @@
-.progress-page{
-    display:flex;
-    gap:25px;
-    padding:30px;
+.progress-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.progress-left{
-    flex:2;
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.progress-right{
-    width:340px;
+.divider {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #eee;
 }
 
-.progress-card,
-.progress-summary,
-.history-card{
-
-    background:#fff;
-
-    border-radius:15px;
-
-    padding:25px;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-
+/* Style Lịch sử tiến độ (Sinh viên) */
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
 }
 
-.progress-card h2{
-    font-weight:bold;
-    margin-bottom:10px;
+.history-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 15px;
+    background-color: #f9f9f9;
 }
 
-.progress-card p{
-    color:#666;
-    margin-bottom:25px;
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-bottom: 8px;
 }
 
-.progress-card label{
-    display:block;
-    margin-top:20px;
-    margin-bottom:8px;
-    font-weight:600;
+.status-badge.submitted {
+    color: #2e7d32;
+    background-color: #e8f5e9;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
 }
 
-.form-control{
-    width:100%;
-    border:1px solid #ddd;
-    border-radius:8px;
-    padding:12px;
+.card-footer {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px dashed #ccc;
+    color: #333;
 }
 
-textarea{
-    resize:none;
+/* Style Bảng (Giảng viên & Admin) */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
 }
 
-.button-group{
-
-    margin-top:25px;
-
-    display:flex;
-
-    justify-content:flex-end;
-
-    gap:15px;
-
+.custom-table th, .custom-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
 }
 
-.draft-btn{
-
-    background:#fff;
-
-    color:#e91e63;
-
-    border:1px solid #e91e63;
-
-    padding:10px 30px;
-
-    border-radius:8px;
-
+.custom-table th {
+    background-color: #f4f6f8;
+    font-weight: 600;
 }
 
-.submit-btn{
-
-    background:#e91e63;
-
-    color:#fff;
-
-    border:none;
-
-    padding:10px 30px;
-
-    border-radius:8px;
-
+.btn-primary {
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.progress-summary{
-
-    margin-bottom:20px;
-
+.btn-secondary {
+    background-color: #757575;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.progress-summary h4{
-
-    margin-bottom:20px;
-
+.btn-action {
+    background: none;
+    border: none;
+    color: #1976d2;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.summary-box{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-top:20px;
-
+.btn-delete {
+    background: none;
+    border: none;
+    color: #d32f2f;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.summary-box div{
-
-    width:48%;
-
-    text-align:center;
-
-    background:#f8f8f8;
-
-    padding:15px;
-
-    border-radius:10px;
-
+/* Modal Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.history-card{
-
-    max-height:600px;
-
-    overflow:auto;
-
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    width: 450px;
 }
 
-.history-header{
-
-    margin-bottom:20px;
-
+.form-group {
+    margin-bottom: 15px;
 }
 
-.history-item{
-
-    padding:15px 0;
-
-    border-bottom:1px solid #eee;
-
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
 }
 
-.history-item h5{
-
-    margin-bottom:8px;
-
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
 }
 
-.history-item p{
-
-    margin-bottom:8px;
-
-    color:#666;
-
-}
-
-.progress{
-
-    height:12px;
-
-    border-radius:20px;
-
-    background:#f0f0f0;
-
-    overflow:hidden;
-
-}
-
-.progress-bar{
-
-    background:#e91e63;
-
-    height:100%;
-
-    color:white;
-
-    font-size:11px;
-
-    text-align:center;
-
-    line-height:12px;
-
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
 }

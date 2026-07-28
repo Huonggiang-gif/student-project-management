@@ -146,15 +146,6 @@
     color:#fff;
     transform:translateY(-2px);
 }
-/* nút xóa */
-.delete-btn{
-    background:#fee2e2;
-    color:#dc2626;
-}
-
-.delete-btn:hover{
-    background:#fecaca;
-}
 /* ===== Overlay ===== */
 
 .modal-overlay{

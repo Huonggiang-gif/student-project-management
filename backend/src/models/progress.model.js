@@ -156,6 +156,37 @@ async function findProgressById(id) {
 }
 
 // =========================
+// Lấy tiến độ của sinh viên
+// =========================
+async function findProgressByStudent(studentId) {
+
+    const [rows] = await db.query(
+
+        `SELECT
+            p.id,
+            p.description,
+            p.lecturer_comment,
+            p.updated_at,
+            t.title
+
+        FROM progress_reports p
+
+        INNER JOIN topics t
+            ON p.topic_id = t.id
+
+        WHERE t.student_id = ?
+
+        ORDER BY p.updated_at DESC`,
+
+        [studentId]
+
+    );
+
+    return rows;
+
+}
+
+// =========================
 // Thêm tiến độ
 // =========================
 async function createProgress(topic_id, description) {
@@ -215,6 +246,8 @@ module.exports = {
     findProgressByTopic,
 
     findProgressById,
+
+    findProgressByStudent,
 
     createProgress,
 

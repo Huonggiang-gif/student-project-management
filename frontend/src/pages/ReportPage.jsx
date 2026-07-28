@@ -1,19 +1,19 @@
 import StudentReport from "../components/report/StudentReport";
-import TeacherReport from "../components/report/TeacherReport";
-
+import AdminReport from "../components/report/AdminReport";
+import LecturerReport from "../components/report/LecturerReport";
 function ReportPage() {
 
-    const user =
-        JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user?.role === "admin") {
+        return <AdminReport />;
+    }
 
     if (user?.role === "lecturer") {
-
-        return <TeacherReport />;
-
+        return <LecturerReport />;
     }
 
     return <StudentReport />;
-
 }
 
 export default ReportPage;

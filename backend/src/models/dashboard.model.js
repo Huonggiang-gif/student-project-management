@@ -18,11 +18,37 @@ exports.getStats = async () => {
         "SELECT COUNT(*) AS total FROM topics"
     );
 
+    const [[pending]] = await db.query(
+        "SELECT COUNT(*) AS total FROM topics WHERE status='pending'"
+    );
+
+    const [[waiting]] = await db.query(
+        "SELECT COUNT(*) AS total FROM topics WHERE status='waiting_approval'"
+    );
+
+    const [[approved]] = await db.query(
+        "SELECT COUNT(*) AS total FROM topics WHERE status='approved'"
+    );
+
+    const [[inProgress]] = await db.query(
+        "SELECT COUNT(*) AS total FROM topics WHERE status='in_progress'"
+    );
+
+    const [[completed]] = await db.query(
+        "SELECT COUNT(*) AS total FROM topics WHERE status='completed'"
+    );
+
     return {
         totalUsers: users.total,
         totalStudents: students.total,
         totalLecturers: lecturers.total,
-        totalTopics: topics.total
+        totalTopics: topics.total,
+
+        pending: pending.total,
+        waitingApproval: waiting.total,
+        approved: approved.total,
+        inProgress: inProgress.total,
+        completed: completed.total
     };
 };
 

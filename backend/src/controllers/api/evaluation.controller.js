@@ -1,10 +1,11 @@
 const evaluationModel = require("../../models/evaluation.model")
+const reportModel = require("../../models/report.model")
 
 // Lấy danh sách đánh giá theo đề tài
 async function getEvaluations(req, res) {
-    const { topicId } = req.params
+    const { topic_id } = req.params
     try {
-        const evaluations = await evaluationModel.findEvaluationsByTopic(topicId)
+        const evaluations = await evaluationModel.findEvaluationsByTopic(topic_id)
         res.json(evaluations)
     } catch (error) {
         console.log(error)
@@ -38,19 +39,19 @@ async function getEvaluationById(req, res) {
 // Thêm đánh giá mới
 async function createEvaluation(req, res) {
     try {
+        console.log("BODY:", req.body);
         const {
             topic_id,
-            lecturer_id,
             report_score,
             demo_score,
             presentation_score,
             defense_score,
             comment
         } = req.body
+        const lecturer_id = req.user.id
         // Kiểm tra dữ liệu
         if (
             !topic_id ||
-            !lecturer_id ||
             report_score == null ||
             demo_score == null ||
             presentation_score == null ||
@@ -60,6 +61,7 @@ async function createEvaluation(req, res) {
                 message: "Vui lòng nhập đầy đủ thông tin đánh giá"
             })
         }
+        
         // Tính điểm tổng
         const total_score = Number(
             (
@@ -81,6 +83,15 @@ async function createEvaluation(req, res) {
             total_score,
             comment
         )
+        // Cập nhật trạng thái báo cáo sau khi đánh giá
+        const report = await reportModel.findReportByTopicId(topic_id)
+
+        if (report) {
+            const resultUpdate = await reportModel.updateReportStatus(
+                report.id,
+                "reviewed"
+            )
+        }
         res.status(201).json({
             message: "Chấm điểm thành công",
             evaluation_id: result.insertId,

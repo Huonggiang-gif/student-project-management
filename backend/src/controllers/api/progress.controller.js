@@ -2,13 +2,25 @@ const progressModel = require("../../models/progress.model");
 const topicModel = require("../../models/topic.model");
 
 // =========================
-// Lấy tất cả tiến độ
+// Lấy danh sách tiến độ
 // =========================
 async function getAllProgress(req, res) {
 
     try {
 
-        const progress = await progressModel.findAllProgress();
+        let progress;
+
+        if (req.user.role === "student") {
+
+            progress = await progressModel.findProgressByStudent(
+                req.user.id
+            );
+
+        } else {
+
+            progress = await progressModel.findAllProgress();
+
+        }
 
         return res.status(200).json(progress);
 

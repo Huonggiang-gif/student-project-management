@@ -11,6 +11,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(
+    "/uploads",
+    express.static(path.join(__dirname, "../uploads"))
+)
+
 const authRoutes = require("./routes/api/auth.route");
 const dashboardRoutes = require("./routes/api/dashboard.routes");
 const topicRoutes = require("./routes/api/topic.route");
@@ -27,9 +32,6 @@ app.use("/api/progress", progressRoute);
 app.use("/api/evaluations", evaluationRoute);
 app.use("/api/users", userRoutes);
 
-app.use(
-    "/uploads",
-    express.static(path.join(__dirname, "../uploads"))
-)
-
 module.exports = app;
+
+

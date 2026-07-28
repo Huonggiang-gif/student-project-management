@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import EvaluationForm from "../components/evaluation/EvaluationForm";
 import EvaluationList from "../components/evaluation/EvaluationList";
 
-import { getEvaluations } from "../services/evaluationService";
+import { getEvaluation } from "../services/evaluationService";
 
 function EvaluationPage() {
 

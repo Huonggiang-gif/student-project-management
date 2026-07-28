@@ -22,10 +22,6 @@ import SettingsPage from "../pages/settingPage";
         ADMIN
 ======================= */
 
-
-
-
-
 import AdminProject from "../pages/project/admin/AdminProject";
 import AdminTopicCreate from "../pages/project/admin/AdminTopicCreate";
 import AdminTopicDetail from "../pages/project/admin/AdminTopicDetail";
@@ -82,9 +78,6 @@ function AppRoutes() {
 
                 </Route>
 
-                {/* =======================
-                        DASHBOARD
-                ======================= */}
 
                 <Route element={<ProtectedRoute />}>
 
@@ -97,7 +90,7 @@ function AppRoutes() {
 
                         {/* Report */}
                         <Route
-                            path="/report"
+                            path="/reports"
                             element={<ReportPage />}
                         />
 
@@ -106,7 +99,6 @@ function AppRoutes() {
                             path="/evaluation"
                             element={<EvaluationPage />}
                         />
-
 
                     </Route>
 
@@ -193,9 +185,7 @@ function AppRoutes() {
                 <Route
                     element={<ProtectedRoute roles={["student"]} />}
                 >
-
                     <Route element={<MainLayout />}>
-
                         <Route
                             path="/student/project"
                             element={<StudentProject />}
@@ -222,9 +212,7 @@ function AppRoutes() {
                         />
 
                     </Route>
-
                 </Route>
-
             </Routes>
 
         </BrowserRouter>

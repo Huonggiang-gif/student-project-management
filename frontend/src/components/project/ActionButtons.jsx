@@ -134,14 +134,6 @@ function ActionButtons({
                         </button>
                     )}
 
-                    {/* Đánh giá */}
-                    <Link
-                        to={`/evaluation/${topic.id}`}
-                        className="btn btn-warning btn-sm"
-                        title="Đánh giá"
-                    >
-                        <i className="bi bi-star-fill"></i>
-                    </Link>
                 </>
             )}
 

@@ -1,5 +1,5 @@
 import "../../assets/styles/User.css";
-import { FaEye, FaEdit, FaLock, FaUnlock, FaTrash} from "react-icons/fa";
+import { FaEye, FaEdit, FaLock, FaUnlock} from "react-icons/fa";
 
 function UserTable({users, loading, onEdit, onChangeStatus, onView}) {
 
@@ -72,12 +72,6 @@ function UserTable({users, loading, onEdit, onChangeStatus, onView}) {
                                             ? <FaLock />
                                             : <FaUnlock />
                                         }
-                                    </button>
-                                    <button
-                                        className="action-btn delete-btn"
-                                        title="Xóa người dùng"
-                                    >
-                                        <FaTrash />
                                     </button>
                                 </div>
                             </td>
