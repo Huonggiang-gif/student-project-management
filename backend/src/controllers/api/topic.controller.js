@@ -86,16 +86,19 @@ exports.createTopic = async (req, res) => {
 exports.updateTopic = async (req, res) => {
     try {
         const topic = await Topic.getById(req.params.id);
-        if (req.user.role === "lecturer") {
-            if (Number(topic.lecturer_id) !== Number(req.user.id)) {
-                return res.status(403).json({
-                    message: "Bạn không có quyền sửa đề tài này."
-                });
-            }
-        }
+
         if (!topic) {
             return res.status(404).json({
                 message: "Không tìm thấy đề tài"
+            });
+        }
+
+        if (
+            req.user.role === "lecturer" &&
+            Number(topic.lecturer_id) !== Number(req.user.id)
+        ) {
+            return res.status(403).json({
+                message: "Bạn không có quyền sửa đề tài này."
             });
         }
 
@@ -103,22 +106,29 @@ exports.updateTopic = async (req, res) => {
         // Quyền của sinh viên
         // =============================
         if (req.user.role === "student") {
-            // Chỉ được sửa đề tài của mình
-            if (topic.student_id !== req.user.id) {
+            // 1. Ép kiểu về Number để so sánh chính xác id người dùng
+            if (Number(topic.student_id) !== Number(req.user.id)) {
                 return res.status(403).json({
                     message: "Bạn không có quyền sửa đề tài này"
                 });
             }
-            // Chỉ được sửa khi chưa được duyệt
-            if (
-                topic.status !== "pending" &&
-                topic.status !== "rejected"
-            ) {
-                return res.status(403).json({
-                    message: "Đề tài đã được duyệt hoặc đang thực hiện nên không thể chỉnh sửa."
+
+            // 2. Cho phép sinh viên ĐÁNH DẤU HOÀN THÀNH (chuyển status thành completed)
+            if (req.body.status === "completed") {
+                await Topic.updateStatus(req.params.id, "completed");
+                return res.json({
+                    message: "Đã đánh dấu hoàn thành đề tài"
                 });
             }
-            // Sinh viên KHÔNG được đổi trạng thái
+
+            // 3. Nếu sửa thông tin cơ bản (tên, mô tả) thì chỉ cho phép khi chưa duyệt/bị từ chối
+            if (topic.status !== "pending" && topic.status !== "rejected") {
+                return res.status(403).json({
+                    message: "Đề tài đã duyệt hoặc đang thực hiện, không thể sửa thông tin cơ bản."
+                });
+            }
+
+            // Cập nhật thông tin cơ bản
             const data = [
                 req.body.title,
                 req.body.description,
@@ -130,6 +140,7 @@ exports.updateTopic = async (req, res) => {
                 message: "Cập nhật thành công"
             });
         }
+
         // Giảng viên/Admin chỉ được sửa nội dung khi đề tài chưa thực hiện
         if (
             (req.user.role === "lecturer" || req.user.role === "admin") &&
@@ -163,7 +174,7 @@ exports.updateTopic = async (req, res) => {
             req.body.title,
             req.body.description,
             req.body.lecturer_id,
-            req.body.status
+            status
         ];
         await Topic.update(req.params.id, data);
         res.json({
@@ -175,6 +186,31 @@ exports.updateTopic = async (req, res) => {
             message: "Lỗi server"
         });
     }
+};
+
+exports.updateTopicStatus = async (req, res) => {
+
+    try {
+
+        await Topic.updateStatus(
+            req.params.id,
+            req.body.status
+        );
+
+        res.json({
+            message: "Cập nhật trạng thái thành công"
+        });
+
+    } catch (err) {
+
+        console.log(err);
+
+        res.status(500).json({
+            message: "Lỗi server"
+        });
+
+    }
+
 };
 
 // Xóa

@@ -14,7 +14,6 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import DashboardPage from "../pages/DashboardPage";
 import UserPage from "../pages/UserPage";
-import ProgressPage from "../pages/ProgressPage";
 import ReportPage from "../pages/ReportPage";
 import EvaluationPage from "../pages/EvaluationPage";
 import SettingsPage from "../pages/settingPage";
@@ -23,10 +22,16 @@ import SettingsPage from "../pages/settingPage";
         ADMIN
 ======================= */
 
+
+
+
+
 import AdminProject from "../pages/project/admin/AdminProject";
 import AdminTopicCreate from "../pages/project/admin/AdminTopicCreate";
 import AdminTopicDetail from "../pages/project/admin/AdminTopicDetail";
 import AdminTopicEdit from "../pages/project/admin/AdminTopicEdit";
+
+import AdminProgress from "../pages/progress/admin/AdminProgress";
 
 /* =======================
        LECTURER
@@ -34,6 +39,8 @@ import AdminTopicEdit from "../pages/project/admin/AdminTopicEdit";
 
 import LecturerProject from "../pages/project/lecturer/LecturerProject";
 import LecturerTopicDetail from "../pages/project/lecturer/LecturerTopicDetail";
+
+import LecturerProgress from "../pages/progress/lecturer/LecturerProgress";
 
 /* =======================
         STUDENT
@@ -43,6 +50,8 @@ import StudentProject from "../pages/project/student/StudentProject";
 import StudentRegisterTopic from "../pages/project/student/StudentRegisterTopic";
 import StudentTopicDetail from "../pages/project/student/StudentTopicDetail";
 import StudentTopicEdit from "../pages/project/student/StudentTopicEdit";
+
+import StudentProgress from "../pages/progress/student/StudentProgress";
 
 function AppRoutes() {
 
@@ -98,12 +107,7 @@ function AppRoutes() {
                             element={<EvaluationPage />}
                         />
 
-                        {/* Progress */}
-                        <Route
-                            path="/task"
-                            element={<ProgressPage />}
-                        />
-        
+
                     </Route>
 
                 </Route>
@@ -119,9 +123,10 @@ function AppRoutes() {
                     <Route element={<MainLayout />}>
 
                         <Route
-                            path="/project"
+                            path="/admin/project"
                             element={<AdminProject />}
                         />
+
 
                         <Route
                             path="/project/create"
@@ -136,6 +141,11 @@ function AppRoutes() {
                         <Route
                             path="/project/edit/:id"
                             element={<AdminTopicEdit />}
+                        />
+
+                        <Route
+                            path="/admin/progress"
+                            element={<AdminProgress />}
                         />
 
                         <Route
@@ -167,7 +177,10 @@ function AppRoutes() {
                             element={<LecturerTopicDetail />}
                         />
 
-                        
+                        <Route
+                            path="/lecturer/progress"
+                            element={<LecturerProgress />}
+                        />
 
                     </Route>
 
@@ -201,6 +214,11 @@ function AppRoutes() {
                         <Route
                             path="/student/project/edit/:id"
                             element={<StudentTopicEdit />}
+                        />
+
+                        <Route
+                            path="/student/progress"
+                            element={<StudentProgress />}
                         />
 
                     </Route>

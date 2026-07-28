@@ -3,6 +3,7 @@ const router = express.Router()
 
 const progressController = require("../../controllers/api/progress.controller")
 
+router.get("/", progressController.getAllProgress);
 // Lấy chi tiết tiến độ
 router.get("/detail/:id", progressController.getProgressById)
 

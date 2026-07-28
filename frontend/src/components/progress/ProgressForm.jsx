@@ -1,27 +1,44 @@
 import { useState } from "react";
 import "../../assets/styles/ProgressForm.css";
 
-function ProgressForm({ onCreate }) {
+function ProgressForm({ topicId, onCreate, onComplete }) {
 
-    const [topicId, setTopicId] = useState("");
     const [description, setDescription] = useState("");
-
+    const [completed, setCompleted] = useState(false);
     async function handleSubmit(e) {
+
         e.preventDefault();
 
-        if (!topicId) {
-            alert("Vui lòng nhập Topic ID");
-            return;
-        }
-
         if (!description.trim()) {
-            alert("Vui lòng nhập tiến độ");
+
+            alert("Vui lòng nhập nội dung tiến độ");
+
             return;
+
         }
 
-        await onCreate(topicId, description);
+        try {
 
-        setDescription("");
+            await onCreate(topicId, description);
+
+            if (completed) {
+
+                await onComplete(topicId);
+
+            }
+
+            setDescription("");
+
+            setCompleted(false);
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert("Cập nhật tiến độ thất bại");
+
+        }
+
     }
 
     return (
@@ -30,24 +47,7 @@ function ProgressForm({ onCreate }) {
             className="progress-form"
             onSubmit={handleSubmit}
         >
-
             <h2>Cập nhật tiến độ</h2>
-
-            <div className="form-group">
-
-                <label>Topic ID</label>
-
-                <input
-                    type="number"
-                    value={topicId}
-                    onChange={(e) =>
-                        setTopicId(e.target.value)
-                    }
-                    placeholder="Nhập Topic ID"
-                />
-
-            </div>
-
             <div className="form-group">
 
                 <label>Mô tả tiến độ</label>
@@ -62,7 +62,21 @@ function ProgressForm({ onCreate }) {
                 />
 
             </div>
+            <div className="form-check mt-3">
 
+                <input
+                    type="checkbox"
+                    checked={completed}
+                    onChange={(e) => setCompleted(e.target.checked)}
+                />
+
+                <label>
+
+                    Tôi đã hoàn thành đề tài
+
+                </label>
+
+            </div>
             <button
                 className="btn btn-primary"
                 type="submit"

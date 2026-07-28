@@ -146,7 +146,7 @@ function AdminTopicDetail() {
 
                         <button
                             className="btn btn-secondary"
-                            onClick={() => navigate("/project")}
+                            onClick={() => navigate("/admin/project")}
                         >
                             Quay lại
                         </button>

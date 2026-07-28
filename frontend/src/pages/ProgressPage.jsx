@@ -3,13 +3,7 @@ import { useEffect, useState } from "react";
 import ProgressForm from "../components/progress/ProgressForm";
 import ProgressList from "../components/progress/ProgressList";
 import LecturerCommentModal from "../components/progress/LecturerCommentModal";
-
-import {
-    getProgress,
-    createProgress,
-    deleteProgress,
-    updateComment
-} from "../services/progressService";
+import progressService from "../services/progressService";
 
 import "../assets/styles/ProgressPage.css";
 
@@ -37,7 +31,7 @@ function ProgressPage() {
 
             setLoading(true);
 
-            const data = await getProgress(id);
+            const data = await progressService.getProgress(id);
 
             setProgress(data);
 
@@ -69,7 +63,10 @@ function ProgressPage() {
 
         try {
 
-            await createProgress(topic, description);
+            await progressService.createProgress({
+                topic_id: topic,
+                description
+            });
 
             alert("Thêm tiến độ thành công");
 
@@ -95,7 +92,7 @@ function ProgressPage() {
 
         try {
 
-            await deleteProgress(id);
+            await progressService.deleteProgress(id);
 
             alert("Xóa thành công");
 
@@ -115,7 +112,9 @@ function ProgressPage() {
 
         try {
 
-            await updateComment(id, comment);
+            await progressService.updateComment(id, {
+                lecturer_comment: comment
+            });
 
             alert("Đã lưu nhận xét");
 
@@ -138,6 +137,7 @@ function ProgressPage() {
         <div className="progress-page">
 
             <ProgressForm
+                topicId={topicId}
                 onCreate={handleCreate}
             />
 

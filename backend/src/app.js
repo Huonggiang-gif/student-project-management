@@ -9,6 +9,7 @@ app.use(cors());
 
 // Parse JSON
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const authRoutes = require("./routes/api/auth.route");
 const dashboardRoutes = require("./routes/api/dashboard.routes");

@@ -101,6 +101,13 @@ const Topic = {
     },
 
     // ==========================
+    // Tìm đề tài theo ID
+    // ==========================
+    async findById(id) {
+        return this.getById(id);
+    },
+
+    // ==========================
     // Admin tạo đề tài
     // ==========================
     async createTopic(data) {

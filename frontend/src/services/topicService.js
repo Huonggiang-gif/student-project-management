@@ -68,6 +68,24 @@ const topicService = {
         return response.data;
     },
 
+    async updateStatus(id, status) {
+
+        const response = await axios.patch(
+
+            `${API_URL}/${id}/status`,
+
+            {
+                status
+            },
+
+            getConfig()
+
+        );
+
+        return response.data;
+
+    },
+
     async getAvailableTopics() {
         const response = await axios.get(
             `${API_URL}/available`,
@@ -83,7 +101,42 @@ const topicService = {
             getConfig()
         );
         return response.data;
+    },
+
+    async getLecturerTopics() {
+
+        const response = await axios.get(
+
+            `${API_URL}/lecturer`,
+
+            getConfig()
+
+        );
+
+        return response.data;
+
+    },
+
+    async completeTopic(id) {
+
+        const response = await axios.patch(
+
+            `${API_URL}/${id}`,
+
+            {
+
+                status: "completed"
+
+            },
+
+            getConfig()
+
+        );
+
+        return response.data;
+
     }
+
 
 };
 

@@ -29,7 +29,7 @@ function AdminTopicCreate() {
 
             alert("Tạo đề tài thành công!");
 
-            navigate("/project");
+            navigate("/admin/project");
 
         } catch (error) {
 
@@ -83,7 +83,7 @@ function AdminTopicCreate() {
                         <div className="button-group">
 
                             <Link
-                                to="/project"
+                                to="/admin/project"
                                 className="btn-back"
                             >
                                 Quay lại
