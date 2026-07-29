@@ -18,9 +18,7 @@ import ReportPage from "../pages/ReportPage";
 import EvaluationPage from "../pages/EvaluationPage";
 import SettingsPage from "../pages/settingPage";
 
-/* =======================
-        ADMIN
-======================= */
+/* ADMIN */
 
 import AdminProject from "../pages/project/admin/AdminProject";
 import AdminTopicCreate from "../pages/project/admin/AdminTopicCreate";
@@ -32,9 +30,7 @@ import LecturerProject from "../pages/project/lecturer/LecturerProject";
 import LecturerTopicDetail from "../pages/project/lecturer/LecturerTopicDetail";
 import LecturerProgress from "../pages/progress/lecturer/LecturerProgress";
 
-/* =======================
-        STUDENT
-======================= */
+/* STUDENT*/
 
 import StudentProject from "../pages/project/student/StudentProject";
 import StudentRegisterTopic from "../pages/project/student/StudentRegisterTopic";
@@ -91,9 +87,7 @@ function AppRoutes() {
 
                 </Route>
 
-                {/* =======================
-                            ADMIN
-                ======================= */}
+                {/* ADMIN*/}
 
                 <Route
                     element={<ProtectedRoute roles={["admin"]} />}
@@ -136,9 +130,7 @@ function AppRoutes() {
 
                 </Route>
 
-                {/* =======================
-                        LECTURER
-                ======================= */}
+                {/*LECTURER */}
 
                 <Route
                     element={<ProtectedRoute roles={["lecturer"]} />}
@@ -164,9 +156,7 @@ function AppRoutes() {
 
                 </Route>
 
-                {/* =======================
-                        STUDENT
-                ======================= */}
+                {/* STUDENT */}
 
                 <Route
                     element={<ProtectedRoute roles={["student"]} />}

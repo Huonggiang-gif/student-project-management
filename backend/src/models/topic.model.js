@@ -1,9 +1,7 @@
 const db = require("../config/db");
 
 const Topic = {
-    // ==========================
     // Lấy tất cả đề tài (Admin)
-    // ==========================
     async getAll() {
         const [rows] = await db.query(`
             SELECT
@@ -28,9 +26,7 @@ const Topic = {
         return rows;
     },
 
-    // ==========================
     // Danh sách đề tài chưa có người đăng ký
-    // ==========================
     async getAvailableTopics() {
         const [rows] = await db.query(`
         SELECT
@@ -45,9 +41,7 @@ const Topic = {
         return rows;
     },
 
-    // ==========================
     // Đề tài của sinh viên
-    // ==========================
     async getByStudentId(studentId) {
         const [rows] = await db.query(`
             SELECT
@@ -62,9 +56,7 @@ const Topic = {
         return rows;
     },
 
-    // ==========================
     // Đề tài của giảng viên
-    // ==========================
     async getByLecturerId(lecturerId) {
         const [rows] = await db.query(`
             SELECT
@@ -92,9 +84,7 @@ const Topic = {
 
         return rows;
     },
-    // ==========================
     // Chi tiết đề tài
-    // ==========================
     async getById(id) {
         const [rows] = await db.query(`
             SELECT
@@ -113,16 +103,12 @@ const Topic = {
         return rows[0];
     },
 
-    // ==========================
     // Tìm đề tài theo ID
-    // ==========================
     async findById(id) {
         return this.getById(id);
     },
 
-    // ==========================
     // Admin tạo đề tài
-    // ==========================
     async createTopic(data) {
         const sql = `
         INSERT INTO topics
@@ -140,9 +126,7 @@ const Topic = {
         return result;
     },
 
-    // ==========================
     // Cập nhật đề tài
-    // ==========================
     async update(id, data) {
         const sql = `
             UPDATE topics
@@ -160,9 +144,7 @@ const Topic = {
         return result;
     },
 
-    // ==========================
     // Xóa đề tài
-    // ==========================
     async delete(id) {
         const [result] = await db.query(
             "DELETE FROM topics WHERE id = ?",
@@ -171,9 +153,7 @@ const Topic = {
         return result;
     },
 
-    // ==========================
     // Cập nhật trạng thái
-    // ==========================
     async updateStatus(id, status) {
         const [result] = await db.query(
             `
@@ -186,9 +166,7 @@ const Topic = {
         return result;
     },
 
-    // ==========================
     // Đánh giá đề tài
-    // ==========================
     async reviewTopic(id, score, review) {
         const [result] = await db.query(
             `
@@ -234,9 +212,7 @@ const Topic = {
         return rows;
     },
 
-    // ==========================
     // Kiểm tra sinh viên đã có đề tài
-    // ==========================
     async checkStudentHasTopic(studentId) {
         const [rows] = await db.query(
             `
@@ -255,9 +231,7 @@ const Topic = {
         return rows[0];
     },
 
-    // ==========================
     // Sinh viên đăng ký đề tài
-    // ==========================
     async registerTopic(
         topicId,
         studentId,
