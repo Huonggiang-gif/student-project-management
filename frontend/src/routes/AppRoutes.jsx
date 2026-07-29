@@ -60,14 +60,9 @@ function AppRoutes() {
                         path="/register"
                         element={<RegisterPage />}
                     />
-
                 </Route>
-
-
                 <Route element={<ProtectedRoute />}>
-
                     <Route element={<MainLayout />}>
-
                         <Route
                             path="/dashboard"
                             element={<DashboardPage />}
