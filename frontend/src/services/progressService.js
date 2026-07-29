@@ -6,9 +6,13 @@ const API_URL = "http://localhost:3000/api/progress";
 const progressService = {
     // 1. Sinh viên lấy lịch sử tiến độ
     getStudentProgress: (topicId) => {
-        return axios.get(`${API_URL}${topicId ? `?topic_id=${topicId}` : ""}`);
+        return axios.get(`${API_URL}/${topicId}`);
     },
-
+    // Giảng viên xem tiến độ theo đề tài
+    getProgress: async (topicId) => {
+        const res = await axios.get(`${API_URL}/${topicId}`);
+        return res.data;
+    },
     // 2. Sinh viên cập nhật tiến độ
     createProgress: (data) => {
         return axios.post(API_URL, data);
@@ -25,8 +29,9 @@ const progressService = {
     },
 
     // 5. Admin lấy tất cả tiến độ
-    getAllProgressAdmin: () => {
-        return axios.get(`${API_URL}/admin/all`);
+    getAllProgress: async () => {
+    const res = await axios.get(API_URL);
+    return res.data;
     },
 
     // 6. Admin xóa tiến độ

@@ -26,16 +26,10 @@ import AdminProject from "../pages/project/admin/AdminProject";
 import AdminTopicCreate from "../pages/project/admin/AdminTopicCreate";
 import AdminTopicDetail from "../pages/project/admin/AdminTopicDetail";
 import AdminTopicEdit from "../pages/project/admin/AdminTopicEdit";
-
 import AdminProgress from "../pages/progress/admin/AdminProgress";
-
-/* =======================
-       LECTURER
-======================= */
 
 import LecturerProject from "../pages/project/lecturer/LecturerProject";
 import LecturerTopicDetail from "../pages/project/lecturer/LecturerTopicDetail";
-
 import LecturerProgress from "../pages/progress/lecturer/LecturerProgress";
 
 /* =======================
@@ -46,7 +40,6 @@ import StudentProject from "../pages/project/student/StudentProject";
 import StudentRegisterTopic from "../pages/project/student/StudentRegisterTopic";
 import StudentTopicDetail from "../pages/project/student/StudentTopicDetail";
 import StudentTopicEdit from "../pages/project/student/StudentTopicEdit";
-
 import StudentProgress from "../pages/progress/student/StudentProgress";
 
 function AppRoutes() {
@@ -99,7 +92,6 @@ function AppRoutes() {
                             path="/evaluation"
                             element={<EvaluationPage />}
                         />
-
                     </Route>
 
                 </Route>
@@ -173,7 +165,6 @@ function AppRoutes() {
                             path="/lecturer/progress"
                             element={<LecturerProgress />}
                         />
-
                     </Route>
 
                 </Route>

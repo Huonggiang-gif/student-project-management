@@ -19,31 +19,18 @@ router.get(
 );
 
 router.get(
-
     "/available",
-
     authMiddleware,
-
     roleMiddleware.authorize("student"),
-
     topicController.getAvailableTopics
-
 );
-
-
 
 router.post(
-
     "/register",
-
     authMiddleware,
-
     roleMiddleware.authorize("student"),
-
     topicController.registerTopic
-
 );
-
 
 // Tạo đề tài
 router.post(

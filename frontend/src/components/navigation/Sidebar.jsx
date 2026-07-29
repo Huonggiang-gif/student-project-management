@@ -26,12 +26,8 @@ function Sidebar() {
                 : "/student/progress";
 
     // Đường dẫn báo cáo
-    const reportPath =
-        user?.role === "admin"
-            ? "/admin/report"
-            : user?.role === "lecturer"
-                ? "/lecturer/report"
-                : "/student/report";
+    // Đường dẫn báo cáo
+    const reportPath = "/reports";
 
     function handleLogout() {
 
@@ -119,7 +115,6 @@ function Sidebar() {
                     <FaChartBar />
                     <span>Báo cáo</span>
                 </NavLink>
-
             </nav>
 
             {

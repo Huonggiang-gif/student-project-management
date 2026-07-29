@@ -85,7 +85,6 @@ async function createEvaluation(req, res) {
         )
         // Cập nhật trạng thái báo cáo sau khi đánh giá
         const report = await reportModel.findReportByTopicId(topic_id)
-
         if (report) {
             const resultUpdate = await reportModel.updateReportStatus(
                 report.id,

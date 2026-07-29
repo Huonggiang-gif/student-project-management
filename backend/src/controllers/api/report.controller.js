@@ -12,10 +12,8 @@ async function getReports(req, res) {
             success: false,
             message: "Lỗi khi lấy danh sách báo cáo"
         })
-
     }
 }
-
 // Lấy chi tiết báo cáo
 async function getReportById(req, res) {
     const { id } = req.params
@@ -37,46 +35,29 @@ async function getReportById(req, res) {
 }
 // Lấy báo cáo của sinh viên thuộc giảng viên
 async function getReportsByLecturer(req, res) {
-
     try {
-
         const lecturer_id = req.user.id
-
-        const reports = await reportModel.findReportsByLecturer(
-            lecturer_id
-        )
-
+        const reports = await reportModel.findReportsByLecturer(lecturer_id)
         res.json(reports)
-
     } catch (error) {
-
         console.log(error)
-
         res.status(500).json({
             success: false,
             message: "Lỗi khi lấy báo cáo của giảng viên"
         })
-
     }
 }
 // Xem tất cả báo cáo
 async function getAllReports(req, res) {
-
     try {
-
-        const reports = await reportModel.getAllReports();
-
-        res.json(reports);
-
+        const reports = await reportModel.getAllReports()
+        res.json(reports)
     } catch (error) {
-
         res.status(500).json({
             message: error.message
-        });
-
+        })
     }
-
-};
+}
 // Nộp báo cáo
 async function createReport(req, res) {
     try {
@@ -103,8 +84,7 @@ async function createReport(req, res) {
         // Thông tin file
         const file_name = req.file.filename
         const file_url = "/uploads/" + req.file.filename
-        const file_size =
-            (req.file.size / 1024 / 1024).toFixed(2) + " MB"
+        const file_size = (req.file.size / 1024 / 1024).toFixed(2) + " MB"
         const result = await reportModel.createReport(
             topic_id,
             file_name,
@@ -130,7 +110,6 @@ async function createReport(req, res) {
         })
     }
 }
-
 // Cập nhật trạng thái
 async function updateStatus(req, res) {
     const { id } = req.params
@@ -141,13 +120,7 @@ async function updateStatus(req, res) {
                 message: "Vui lòng nhập trạng thái"
             })
         }
-        if (
-            ![
-                "submitted",
-                "reviewed",
-                "needs_revision"
-            ].includes(status)
-        ) {
+        if (!["submitted", "reviewed", "needs_revision"].includes(status)) {
             return res.status(400).json({
                 message: "Trạng thái không hợp lệ"
             })
@@ -170,7 +143,6 @@ async function updateStatus(req, res) {
         })
     }
 }
-
 // Xóa báo cáo
 async function deleteReport(req, res) {
     const { id } = req.params

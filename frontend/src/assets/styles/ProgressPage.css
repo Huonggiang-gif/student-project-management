@@ -1,29 +1,19 @@
 .progress-page{
-
     padding:25px;
 
 }
 
 .progress-toolbar{
-
     display:flex;
-
     gap:15px;
-
     align-items:center;
-
     margin-bottom:20px;
-
 }
 
 .progress-toolbar input{
-
     width:250px;
-
     padding:10px 12px;
-
     border:1px solid #ddd;
-
     border-radius:8px;
 
 }

@@ -25,8 +25,12 @@ function StudentProgress() {
     const fetchProgress = async () => {
         try {
             const res = await progressService.getStudentProgress(topicId);
-            // Kiểm tra dữ liệu trả về từ Axios
-            const data = res.data || res;
+
+            console.log("FETCH PROGRESS:", res);
+
+            const data = res.data?.data || res.data || res;
+            console.log("DATA:", data);
+
             setProgressList(Array.isArray(data) ? data : []);
         } catch (error) {
             console.error("Lỗi khi tải tiến độ:", error);
@@ -41,23 +45,39 @@ function StudentProgress() {
             return;
         }
 
-        // Bổ sung topic_id hợp lệ vào payload
         const payload = {
             topic_id: Number(topicId),
+            topicId: Number(topicId),
             week: formData.week,
+            title: formData.week,
             percentage: Number(formData.percentage),
-            description: formData.description
+            progress_percent: Number(formData.percentage),
+            description: formData.description,
+            content: formData.description
         };
 
         try {
+            console.log("PAYLOAD GỬI LÊN:", payload);
             await progressService.createProgress(payload);
+
             alert("Cập nhật tiến độ thành công!");
+
             setShowModal(false);
-            setFormData({ week: "", percentage: 0, description: "" });
-            fetchProgress();
+
+            setFormData({
+                week: "",
+                percentage: 0,
+                description: ""
+            });
+
+            await fetchProgress();
+
         } catch (error) {
             console.error("Lỗi Server:", error.response?.data);
-            alert(error.response?.data?.message || "Lỗi cập nhật tiến độ!");
+            alert(
+                error.response?.data?.message ||
+                "Lỗi cập nhật tiến độ!"
+            );
         }
     };
 
@@ -91,8 +111,10 @@ function StudentProgress() {
                                 </div>
                                 <div className="card-body">
                                     <p className="description">{item.description}</p>
-                                    <p className="percent-text"><strong>Tiến độ:</strong> {item.percentage}%</p>
-                                </div>
+                                    <p className="percent-text">
+                                        <strong>Tiến độ:</strong> {item.percentage ?? item.progress_percent ?? item.percent ?? item.progress ?? 0}%
+                                    </p>
+                                                                    </div>
                                 <div className="card-footer">
                                     <strong>GV:</strong> {item.lecturer_comment || "Chưa có nhận xét"}
                                 </div>
